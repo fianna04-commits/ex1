@@ -3,153 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f7f8fa">
-  <meta name="description" content="VIBE — בוחרים סגנון ואירוע, מגלים לוקים אישיים ומתנסים בשיער, איפור וצבעים בהדמיה מאוירת. ללא AI.">
-  <title>VIBE — הלוק שלך, הווייב שלך</title>
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;450;500;600;650;700;750;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#f7f3ec">
+  <meta name="description" content="FACEFORM — מדריך הסטייל האישי לפנים שלך. מגלים כיוונים לשיער, צבע, איפור, גבות ואקססוריז לפי הבחירות שלך, ללא AI.">
+  <title>FACEFORM — Your Personal Style Guide</title>
   <link rel="stylesheet" href="./styles.css">
-  <script type="module" src="./app.mjs"></script>
+  <script src="./app.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#builder">דילוג לבניית הלוק</a>
-  <header class="header shell">
-    <a class="logo" href="./" aria-label="VIBE — עמוד הבית" dir="ltr" translate="no">vibe<span class="brand-dot" aria-hidden="true"></span></a>
-    <nav aria-label="ניווט ראשי"><a href="#builder">הסטודיו שלך</a><a href="#trends">השראה לעונה</a></nav>
-    <button class="saved-trigger" id="open-saved"><span data-icon="heart" aria-hidden="true"></span><span>האהובים שלי</span><span id="saved-count" aria-hidden="true">0</span></button>
+  <a class="skip-link" href="#studio">דילוג לסטודיו האישי</a>
+  <header class="site-header shell">
+    <a class="wordmark" href="./index.html" dir="ltr" translate="no" aria-label="FACEFORM — עמוד הבית">FACEFORM<span>Your Personal Style Guide</span></a>
+    <nav aria-label="ניווט ראשי"><a href="#studio">הסטודיו שלך</a><a href="#looks">הלוקים שלך</a><a href="#inspiration">השראה</a></nav>
+    <button class="saved-button" id="open-saved"><span data-icon="heart" aria-hidden="true"></span><span>המועדפים שלי</span><span id="saved-count" aria-hidden="true">0</span></button>
   </header>
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> הסטודיו האישי לסטייל שלך</p>
-        <h1 id="hero-title">היום שלך.<br>הסטייל שלך.</h1>
-        <p class="hero-description">מהווייב של הבוקר ועד התוכניות לערב.<br>מגלים שילובים של שיער, איפור וצבע —<br class="desktop-break"> ומוצאים את מה שמרגיש נכון לך.</p>
-        <div class="hero-actions"><a class="button dark" href="#builder">למצוא את הלוק שלי <span data-icon="arrow" aria-hidden="true"></span></a><a class="secondary-link" href="#photo-studio">לעבוד עם תמונה שלי</a></div>
-        <p class="hero-footnote"><span data-icon="sliders" aria-hidden="true"></span> בוחרים, מנסים, משנים. בקצב שלך.</p>
-      </div>
-      <div class="hero-art" aria-label="שני לוקים מאוירים להשראה">
-        <div class="hero-stage"><div class="stage-heading"><span>מרחב לנסות משהו חדש</span><span data-icon="sparkles" aria-hidden="true"></span></div><div class="stage-portrait" id="hero-portrait-front"></div><div class="stage-footer"><span>סטריט, עם טאץ׳ אישי</span><div class="mini-palette" aria-label="גווני הלוק"><i style="--color:#637a8d"></i><i style="--color:#c8916e"></i><i style="--color:#4e352a"></i></div></div></div>
-        <div class="alternate-look"><div id="hero-portrait-back"></div><div><span class="alternate-label">ואולי דווקא…</span><strong>קצת יותר רך.</strong><span>אותו סטודיו, עוד כיוון.</span></div></div>
-      </div>
+      <div class="hero-copy"><p class="kicker">מבט חדש על הסטייל האישי שלך</p><h1 id="hero-title">הפנים שלך.<br>עולם של אפשרויות.</h1><p class="hero-description">תסרוקת, נגיעה של צבע, מסגרת שמוסיפה אופי.<br>מגלים שילובים לפנים לפי המאפיינים, הסגנון והתוכניות שלך.</p><div class="hero-actions"><a class="button primary" href="#studio">לגלות את המראה שלי<span data-icon="arrow" aria-hidden="true"></span></a><a class="text-link" href="#inspiration">להתחיל מקצת השראה</a></div><div class="hero-scope"><span>שיער וצבע</span><i></i><span>איפור וגבות</span><i></i><span>אקססוריז לפנים</span></div></div>
+      <figure class="hero-figure"><img id="hero-image" width="720" height="900" alt="תמונת השראה למראה שיער ואיפור" fetchpriority="high"><figcaption><span>השראה למראה. לא תבנית להיות בה.</span><span class="figure-index" dir="ltr">FACEFORM EDIT / 01</span></figcaption><span class="editorial-stamp" aria-hidden="true">A personal<br>perspective.</span></figure>
     </section>
-    <ol class="how-it-works shell" aria-label="איך זה עובד"><li><span data-icon="sparkles" aria-hidden="true"></span><div><strong>מתחילים בווייב</strong><span>מה מרגיש נכון היום?</span></div></li><li><span data-icon="calendar" aria-hidden="true"></span><div><strong>מתאימים לתוכניות</strong><span>לאירוע, לזמן ולקצב שלך.</span></div></li><li><span data-icon="mirror" aria-hidden="true"></span><div><strong>נותנים טאץ׳ אישי</strong><span>מנסים את השילוב במראה.</span></div></li></ol>
-    <section id="builder" class="builder shell" aria-labelledby="builder-title">
-      <div class="section-heading"><div><p class="eyebrow">מקום לסטייל שלך</p><h2 id="builder-title">לוק שמתחיל בבחירות שלך.</h2></div><span class="pill">שלושה צעדים פשוטים</span></div>
-      <div class="studio-grid">
-        <div class="questionnaire">
-          <div class="step-nav" role="tablist" aria-label="שלבי בניית הלוק">
-            <button id="step-tab-0" role="tab" aria-selected="true" aria-controls="step-0" data-step="0"><span>01</span> הווייב</button>
-            <button id="step-tab-1" role="tab" aria-selected="false" aria-controls="step-1" data-step="1" tabindex="-1"><span>02</span> התוכניות</button>
-            <button id="step-tab-2" role="tab" aria-selected="false" aria-controls="step-2" data-step="2" tabindex="-1"><span>03</span> קצת עליך</button>
-          </div>
-          <form id="profile-form" autocomplete="off">
-            <section id="step-0" class="step-panel" role="tabpanel" aria-labelledby="step-tab-0">
-              <p class="mini-label">נתחיל באנרגיה</p><h3>איזה סגנון עושה לך את זה?</h3><p class="muted">אין צורך להגדיר את עצמך. רק לבחור מה מרגיש נכון עכשיו.</p>
-              <div id="vibe-options" class="vibe-grid" role="group" aria-label="בחירת סגנון"></div>
-              <div class="boldness-field">
-                <label class="range-label" for="boldness">כמה בא לך לצאת מהשגרה? <output id="boldness-output" for="boldness">50% · קצת טוויסט</output></label>
-                <div class="boldness-controls">
-                  <button type="button" class="range-adjust" id="boldness-less" data-boldness-delta="-10" aria-label="הפחתת מידת השינוי בעשרה אחוזים"><span data-icon="minus" aria-hidden="true"></span></button>
-                  <input id="boldness" name="boldness" type="range" min="0" max="100" value="50" step="1" aria-describedby="boldness-help" aria-valuetext="50 אחוז, קצת טוויסט">
-                  <button type="button" class="range-adjust" id="boldness-more" data-boldness-delta="10" aria-label="הגדלת מידת השינוי בעשרה אחוזים"><span data-icon="plus" aria-hidden="true"></span></button>
-                </div>
-                <div class="range-ends"><span>קרוב למוכר</span><span>בא לי להעז</span></div>
-                <p id="boldness-help" class="boldness-help">משינוי עדין ללוק בולט — אפשר לעצור בכל נקודה.</p>
-              </div>
-            </section>
-            <section id="step-1" class="step-panel" role="tabpanel" aria-labelledby="step-tab-1" hidden>
-              <p class="mini-label">על מה אנחנו מתלבשים?</p><h3>לאן יוצאים?</h3><p class="muted">הלוק צריך לעבוד עם התוכניות שלך, וגם עם הזמן שיש לך.</p>
-              <div id="occasion-options" class="choice-grid" role="group" aria-label="בחירת אירוע"></div>
-              <div class="field-grid">
-                <label>זמן להתארגן<select name="time"><option value="5">עד 5 דקות</option><option value="15" selected>בערך רבע שעה</option><option value="30">יש לי חצי שעה ויותר</option></select></label>
-                <label>מה הכיוון באיפור?<select name="makeup"><option value="none">בלי איפור</option><option value="light" selected>נגיעה קטנה</option><option value="full">בא לי לוק מלא</option></select></label>
-                <label>תקציב לשינויים<select name="budget"><option value="closet" selected>עובדים עם מה שיש</option><option value="small">פתוחים לתוספת קטנה</option><option value="flex">יש מקום להשקיע</option></select></label>
-                <label>תחזוקת השיער<select name="maintenance"><option value="low" selected>כמה שפחות התעסקות</option><option value="medium">קצת השקעה זה סבבה</option><option value="high">אוהבים להשקיע</option></select></label>
-              </div>
-            </section>
-            <section id="step-2" class="step-panel" role="tabpanel" aria-labelledby="step-tab-2" hidden>
-              <p class="mini-label">הפרטים שעושים את ההבדל</p><h3>קצת עליך, בקצב שלך.</h3><p class="muted">הפרטים נבחרים ידנית. אפשר לשנות הכול ולנסות כיוון אחר.</p>
-              <fieldset><legend>גוון העור <span>לצבעי האיור</span></legend><div id="skin-options" class="swatch-row" role="group" aria-label="גוון עור"></div></fieldset>
-              <div class="field-grid">
-                <label>מבנה פנים<select name="face"><option value="oval">אובלי</option><option value="round">עגול</option><option value="square">מרובע</option><option value="heart">לב</option><option value="long">מוארך</option><option value="unknown">לא בטוחים</option></select></label>
-                <label>תת־גוון עור<select name="undertone"><option value="neutral">ניטרלי / לא בטוחים</option><option value="warm">חם</option><option value="cool">קר</option></select></label>
-              </div>
-              <fieldset><legend>צבע עיניים</legend><div id="eye-options" class="swatch-row" role="group" aria-label="צבע עיניים"></div></fieldset>
-              <fieldset><legend>צבע שיער נוכחי</legend><div id="hair-options" class="swatch-row" role="group" aria-label="צבע שיער"></div></fieldset>
-              <div class="field-grid">
-                <label>מרקם שיער<select name="texture"><option value="straight">חלק</option><option value="wavy" selected>גלי</option><option value="curly">מתולתל</option><option value="coily">תלתלים צפופים</option></select></label>
-                <label>אורך שיער<select name="length"><option value="short">קצר</option><option value="bob" selected>עד הכתפיים</option><option value="long">ארוך</option><option value="shaved">קצוץ / ללא שיער</option></select></label>
-              </div>
-              <div class="check-row"><label><input name="keepLength" type="checkbox" checked> שומרים על האורך</label><label><input name="glasses" type="checkbox"> עם משקפיים</label><label><input name="beard" type="checkbox"> עם זקן</label></div>
-              <div class="photo-details"><a class="secondary-link" href="#photo-studio">רוצה לנסות איפור על התמונה האישית שלך?</a><p class="muted">אפשר להמשיך גם לסטודיו לתמונות ולמקם את הצבעים ידנית.</p></div>
-            </section>
-            <div class="wizard-footer"><button type="button" class="text-button" id="previous" hidden>→ חזרה</button><span id="step-indicator">שלב 1 מתוך 3</span><button type="button" class="button dark" id="next">ממשיכים <span aria-hidden="true">←</span></button></div>
-          </form>
-        </div>
-        <aside class="mirror-panel" aria-labelledby="mirror-title">
-          <div class="mirror-heading"><span class="live-dot"></span><h3 id="mirror-title">המראה שלך</h3><span class="mirror-tag">מתעדכנת איתך</span></div>
-          <div id="live-portrait" class="live-portrait"></div>
-          <div class="mirror-caption"><span id="preview-vibe">נקי ומדויק</span><div id="preview-palette" class="mini-palette" aria-label="פלטת הצבעים הנוכחית"></div></div>
-          <div class="mirror-message"><span data-icon="sliders" aria-hidden="true"></span><p>כל בחירה פותחת כיוון.<br><strong>אפשר לשנות הכול בדרך.</strong></p></div>
-          <p class="mirror-note">הדמיה מאוירת להמחשת צבעים וסגנון.</p>
-        </aside>
+    <ol class="intro-steps shell" aria-label="איך זה עובד"><li><span>01</span><div><strong>מכירים את המאפיינים שלך</strong><p>בוחרים מה שידוע. על השאר אפשר לדלג.</p></div></li><li><span>02</span><div><strong>מגדירים את הכיוון</strong><p>לאיזה אירוע, ובאיזה סגנון?</p></div></li><li><span>03</span><div><strong>מגלים שלושה לוקים</strong><p>חלופות, צבעים והסברים לבחירה שלך.</p></div></li></ol>
+    <section id="studio" class="studio shell section-space" aria-labelledby="studio-title">
+      <div class="section-heading"><div><p class="kicker">הסטודיו האישי שלך</p><h2 id="studio-title">מתחילים במה שמרגיש שלך.</h2></div><button class="text-button" id="restart">התחלה מחדש<span data-icon="reset" aria-hidden="true"></span></button></div>
+      <div class="personal-mirror">
+        <div class="mirror-side"><span data-icon="face" aria-hidden="true"></span><h3>לראות את התמונה המלאה.</h3><p>אפשר לצרף תמונה שתלווה אותך בבחירה. ההמלצות מתבססות על השאלון, לא על ניתוח התמונה.</p><span class="privacy-note"><span data-icon="lock" aria-hidden="true"></span>התמונה נשארת בדפדפן שלך.</span></div>
+        <div class="photo-center"><div class="photo-frame"><div id="photo-placeholder"><svg viewBox="0 0 180 220" fill="none" aria-hidden="true"><path d="M43 82C40 36 64 18 90 18s50 18 47 64l-5 44c-5 28-24 48-42 55-18-7-37-27-42-55l-5-44Z" stroke="currentColor" stroke-width="1.2"/><path d="M43 84c15-3 29-17 36-35 14 24 33 34 58 35M57 101c8-5 16-5 24 0m18 0c8-5 16-5 24 0M89 105l-5 24c3 3 8 3 11 0m-21 20c12 7 20 7 32 0M64 169v26l-34 17m86-43v26l34 17" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span>מקום לתמונה שלך</span></div><img id="personal-photo" width="480" height="600" alt="תמונת הפנים האישית שלך" hidden></div><div class="photo-actions"><label class="button secondary upload-control"><span data-icon="upload" aria-hidden="true"></span><span id="upload-text">הוספת תמונה</span><input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp" aria-label="בחירת תמונת פנים" aria-describedby="photo-help photo-status"></label><button class="text-button" id="delete-photo" hidden>מחיקת תמונה</button></div><p id="photo-help" class="small-note">JPG, PNG או WebP עד 8MB. אפשר להמשיך גם בלי תמונה.</p><p id="photo-status" class="field-status" role="status"></p></div>
+        <div class="mirror-side mirror-progress"><span class="mini-title">הבחירות שלך</span><strong id="profile-count">0 מתוך 9 מאפיינים</strong><div class="progress-track" aria-hidden="true"><span id="profile-progress"></span></div><p id="profile-summary">כל מאפיין שתבחרו יעזור לדייק את הכיוונים. אין צורך לדעת הכול.</p><div id="selection-summary" class="summary-pills"></div><a href="#looks" class="text-link">לראות את הכיוונים שלי<span data-icon="arrow" aria-hidden="true"></span></a></div>
+      </div>
+      <div class="questionnaire">
+        <div class="step-tabs" role="tablist" aria-label="שלבי ההתאמה"><button role="tab" id="tab-profile" aria-controls="panel-profile" aria-selected="true" data-tab="profile"><span>01</span>המאפיינים שלי</button><button role="tab" id="tab-event" aria-controls="panel-event" aria-selected="false" tabindex="-1" data-tab="event"><span>02</span>האירוע</button><button role="tab" id="tab-style" aria-controls="panel-style" aria-selected="false" tabindex="-1" data-tab="style"><span>03</span>הסגנון</button></div>
+        <form id="profile-form" autocomplete="off">
+          <section id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" class="form-panel"><div class="panel-intro"><h3>הפרטים הקטנים, המראה האישי.</h3><p>בחרו את מה שידוע לכם. אפשר לדלג על כל שדה ולשנות אותו בכל רגע.</p></div>
+            <fieldset class="face-field"><legend>צורת פנים<span>להמחשה בלבד — אין צורך במדידה מדויקת</span></legend><div id="face-options" class="face-options" role="group" aria-label="בחירת צורת פנים"></div></fieldset>
+            <div class="profile-grid"><fieldset><legend>גוון עור</legend><div id="skin-options" class="compact-options" role="group" aria-label="בחירת גוון עור"></div></fieldset><label class="select-field">תת־גוון עור<select name="undertone" id="undertone"><option value="unknown">לא ידוע / לדלג</option><option value="warm">חם</option><option value="cool">קר</option><option value="neutral">ניטרלי</option></select></label><fieldset><legend>צבע עיניים</legend><div id="eyes-options" class="color-options" role="group" aria-label="בחירת צבע עיניים"></div></fieldset><fieldset><legend>צבע שיער נוכחי</legend><div id="hair-options" class="color-options" role="group" aria-label="בחירת צבע שיער"></div></fieldset><label class="select-field">אורך שיער<select name="length" id="length"><option value="unknown">לא ידוע / לדלג</option><option value="shaved">קצוץ מאוד</option><option value="short">קצר</option><option value="medium">עד הכתפיים</option><option value="long">ארוך</option></select></label><fieldset><legend>מרקם שיער</legend><div id="texture-options" class="compact-options texture-options" role="group" aria-label="בחירת מרקם שיער"></div></fieldset><fieldset class="brows-field"><legend>צורת גבות</legend><div id="brows-options" class="brow-options" role="group" aria-label="בחירת צורת גבות"></div></fieldset><label class="select-field">העדפה לאיפור<select name="makeup" id="makeup"><option value="unknown">עוד לא החלטתי / לדלג</option><option value="none">ללא איפור</option><option value="natural">טבעי</option><option value="subtle">עדין</option><option value="bold">מודגש</option></select></label></div>
+          </section>
+          <section id="panel-event" role="tabpanel" aria-labelledby="tab-event" class="form-panel" hidden><div class="panel-intro"><h3>לאן המראה הזה הולך איתך?</h3><p>אותו סגנון יכול לקבל כיוון אחר ביום עבודה, בדייט או באירוע ערב.</p></div><div id="event-options" class="event-options" role="group" aria-label="בחירת אירוע"></div></section>
+          <section id="panel-style" role="tabpanel" aria-labelledby="tab-style" class="form-panel" hidden><div class="panel-intro"><h3>איזה כיוון מושך אותך?</h3><p>בחרו תמונת השראה. היא מייצגת אווירה וסגנון, ולא את התוצאה על הפנים שלך.</p></div><div id="style-options" class="style-options" role="group" aria-label="בחירת סגנון"></div></section>
+          <div class="form-footer"><button class="text-button" type="button" id="previous-step" hidden>חזרה</button><span id="step-status">שלב 1 מתוך 3</span><button class="button primary" type="button" id="next-step">לבחירת אירוע<span data-icon="arrow" aria-hidden="true"></span></button></div>
+        </form>
       </div>
     </section>
-    <section id="results" class="results shell" aria-labelledby="results-title" hidden>
-      <div class="section-heading"><div><p class="eyebrow">מהבחירות שלך, לכיוונים חדשים</p><h2 id="results-title" tabindex="-1">שלושה לוקים להכיר.</h2><p id="results-summary" class="muted"></p></div><button class="text-button" id="edit-profile">עריכת הבחירות</button></div>
-      <div id="look-cards" class="look-grid"></div>
-      <div id="playground" class="playground">
-        <div class="playground-art"><span class="pill">מרחב לשחק עם הלוק</span><div id="edit-portrait"></div><button class="compare-button" id="compare" aria-pressed="false">הצגת הבסיס</button></div>
-        <div class="playground-controls"><p class="eyebrow">מוסיפים את הטאץ׳ שלך</p><h3 id="edit-title">עכשיו מוסיפים את הטאץ׳ שלך.</h3><p class="muted">החליפו פרט אחד או ערבבו הכול. זה הלוק שלכם.</p>
-          <div class="field-grid"><label>תסרוקת<select id="edit-hair"><option value="short">קצר עם מרקם</option><option value="bob">בוב רך</option><option value="long">שכבות ארוכות</option><option value="shaved">קצוץ / ללא שיער</option></select></label><label>מרקם<select id="edit-texture"><option value="straight">חלק</option><option value="wavy">גלי</option><option value="curly">מתולתל</option><option value="coily">תלתלים צפופים</option></select></label></div>
-          <div class="edit-colors"><label>שיער<input type="color" id="edit-hair-color" aria-label="צבע שיער בהדמיה"></label><label>שפתיים<input type="color" id="edit-lip" aria-label="צבע שפתיים בהדמיה"></label><label>סומק<input type="color" id="edit-blush" aria-label="צבע סומק בהדמיה"></label><label>חולצה<input type="color" id="edit-shirt" aria-label="צבע חולצה בהדמיה"></label></div>
-          <label class="range-label" for="edit-intensity">עוצמת האיפור <output id="intensity-output">עדין</output></label><input type="range" id="edit-intensity" min="0" max="100" value="35">
-          <div class="edit-actions"><button class="button dark" id="save-custom"><span data-icon="heart" aria-hidden="true"></span>שמירת הלוק</button><button class="button light" id="download-look"><span data-icon="download" aria-hidden="true"></span>הורדת האיור</button></div>
-          <button class="text-button photo-look-link" id="photo-use-look">לנסות את צבעי הלוק על התמונה שלי</button>
-        </div>
-      </div>
-    </section>
-    <section id="photo-studio" class="photo-studio shell" aria-labelledby="photo-title">
-      <div class="section-heading"><div><p class="eyebrow">המראה, עם תמונה שלך</p><h2 id="photo-title">מנסים את הצבעים עליך.</h2></div><span class="pill">עריכה ידנית · נשארת אצלך</span></div>
-      <p class="muted photo-intro" id="photo-help">מוסיפים תמונה וממקמים שפתון, סומק וצללית בעזרת המסגרת הכחולה. זו המחשה ידנית של צבעים, ללא זיהוי פנים. אפשר לבחור JPG, PNG או WebP עד 8MB.</p>
-      <div class="photo-upload-bar"><label class="upload-label">הוספת תמונה אישית<input id="photo-input" name="referencePhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-status"></label><div id="photo-area" hidden><img id="reference-photo" width="160" height="160" decoding="async" alt="התמונה האישית שנבחרה לעריכה מקומית"><button class="text-button" type="button" id="remove-photo">הסרת התמונה</button></div></div>
-      <p id="photo-status" role="status"></p>
-      <div class="photo-workspace">
-        <div class="photo-canvas-panel"><div class="photo-toolbar"><button class="button light" id="photo-compare" aria-pressed="false" disabled>השוואה למקור</button><button class="text-button" id="photo-undo" disabled>ביטול פעולה</button><button class="text-button" id="photo-reset" disabled>איפוס הצבעים</button></div>
-          <div id="photo-empty" class="photo-empty"><span data-icon="image" aria-hidden="true"></span><h3>התמונה שלך, עוד אפשרויות.</h3><p>בחרו תמונה כדי להתחיל. לצבעים אפשר לתת מקום, ואז לדייק אותו.</p></div>
-          <div id="photo-canvas-frame" class="photo-canvas-frame" hidden><canvas id="photo-canvas" width="1" height="1" tabindex="0" aria-label="מראה לעריכה ידנית של תמונה" aria-describedby="photo-canvas-help"></canvas></div>
-          <p id="photo-canvas-help" class="photo-canvas-help">גררו את המסגרת למקום הרצוי או השתמשו בחיצי המקלדת ובכפתורי המיקום. אפשר לדייק את הגודל בסרגלים.</p>
-        </div>
-        <fieldset id="photo-settings" class="photo-settings" disabled><legend>הכלים שלך</legend>
-          <div id="photo-parts" class="photo-parts" role="group" aria-label="בחירת אזור לעריכה"></div>
-          <div class="photo-part-heading"><h3 id="photo-part-title">שפתיים</h3><label class="photo-visible"><input type="checkbox" id="photo-enabled" checked>הצגת הצבע</label></div>
-          <div class="photo-color-row"><label>גוון הצבע<input type="color" id="photo-color" name="photoColor" value="#ad5269"></label><div><label class="range-label" for="photo-opacity">עוצמת הצבע<output id="photo-opacity-value" for="photo-opacity">45%</output></label><input type="range" id="photo-opacity" name="photoOpacity" min="0" max="100" value="45"></div></div>
-          <div class="photo-position-buttons" id="photo-position-buttons" role="group" aria-label="כיוון מדויק של מיקום הצבע"><button type="button" data-photo-dx="-2" data-photo-dy="0" aria-label="הזזה שמאלה"><span data-icon="left" aria-hidden="true"></span></button><button type="button" data-photo-dx="0" data-photo-dy="-2" aria-label="הזזה למעלה"><span data-icon="up" aria-hidden="true"></span></button><button type="button" data-photo-dx="0" data-photo-dy="2" aria-label="הזזה למטה"><span data-icon="down" aria-hidden="true"></span></button><button type="button" data-photo-dx="2" data-photo-dy="0" aria-label="הזזה ימינה"><span data-icon="right" aria-hidden="true"></span></button></div>
-          <div class="photo-range-grid">
-            <div><label class="range-label" for="photo-x">מיקום לרוחב<output id="photo-x-value" for="photo-x">50%</output></label><input type="range" id="photo-x" name="photoX" min="0" max="100" step="0.5" value="50"></div>
-            <div><label class="range-label" for="photo-y">מיקום לגובה<output id="photo-y-value" for="photo-y">65%</output></label><input type="range" id="photo-y" name="photoY" min="0" max="100" step="0.5" value="65"></div>
-            <div><label class="range-label" for="photo-width">רוחב<output id="photo-width-value" for="photo-width">18%</output></label><input type="range" id="photo-width" name="photoWidth" min="1" max="100" step="0.5" value="18"></div>
-            <div><label class="range-label" for="photo-height">גובה<output id="photo-height-value" for="photo-height">5%</output></label><input type="range" id="photo-height" name="photoHeight" min="1" max="60" step="0.5" value="5"></div>
-            <div><label class="range-label" for="photo-rotation">סיבוב<output id="photo-rotation-value" for="photo-rotation">0°</output></label><input type="range" id="photo-rotation" name="photoRotation" min="-90" max="90" step="1" value="0"></div>
-            <div><label class="range-label" for="photo-softness">רכות הקצוות<output id="photo-softness-value" for="photo-softness">15%</output></label><input type="range" id="photo-softness" name="photoSoftness" min="0" max="100" value="15"></div>
-          </div>
-          <label class="photo-visible photo-guide-control"><input type="checkbox" id="photo-guides" checked>הצגת מסגרת עזר</label>
-          <p class="photo-local-note">ההורדה כוללת את הצבעים בלבד, ללא מסגרת העזר. התמונה והעריכות אינן נשמרות באהובים או נשלחות לשרת.</p>
-        </fieldset>
-      </div>
-      <div class="photo-download-row"><span>אהבת את השילוב? אפשר לשמור אותו אצלך.</span><button class="button dark" id="photo-export" disabled><span data-icon="download" aria-hidden="true"></span>הורדת התמונה</button></div>
-    </section>
-    <section id="trends" class="trends shell" aria-labelledby="trends-title">
-      <div class="section-heading"><div><p class="eyebrow">מה שרואים עכשיו</p><h2 id="trends-title">קצת השראה לעונה.</h2></div><span class="pill">עריכת סתיו 2026</span></div>
-      <p class="trend-intro muted">השראה עדכנית שאפשר לקחת במינון שלך. כל טרנד מגיע עם מקור — וכל לוק נשאר בחירה אישית.</p>
-      <div id="trend-cards" class="trend-grid"></div>
-    </section>
-    <section class="manifesto shell"><span data-icon="sparkles" aria-hidden="true"></span><h2>יותר מקום לנסות.<br>יותר מקום להיות עצמך.</h2><p>ההצעות מבוססות על הבחירות שלך ועל כללי שילוב פשוטים.<br>אפשר לדלג, לשנות, לערבב ולהמציא מחדש.</p><a class="secondary-link" href="#builder">לגלות את הסטייל שלך</a></section>
+    <section id="looks" class="looks shell section-space" aria-labelledby="looks-title"><div class="section-heading"><div><p class="kicker">שלושה כיוונים, הבחירה שלך</p><h2 id="looks-title" tabindex="-1">ה־Edit האישי שלך.</h2><p id="results-summary" class="section-description"></p></div><span class="pill">מתעדכן עם הבחירות שלך</span></div><p class="inspiration-disclaimer"><span data-icon="image" aria-hidden="true"></span>תמונות ההשראה מגיעות מגלריה מוכנה. הן אינן הדמיות של הפנים שלך.</p><div id="look-grid" class="look-grid"></div><p class="live-announcement" id="recommendation-status" role="status" aria-live="polite"></p></section>
+    <section id="inspiration" class="inspiration shell section-space" aria-labelledby="inspiration-title"><div class="section-heading"><div><p class="kicker">אוסף ההשראה</p><h2 id="inspiration-title">לפעמים הכול מתחיל בפרט.</h2></div><div class="gallery-filters" role="group" aria-label="סינון גלריית השראה"><button data-filter="all" aria-pressed="true">הכול</button><button data-filter="hair" aria-pressed="false">שיער</button><button data-filter="makeup" aria-pressed="false">איפור</button><button data-filter="short" aria-pressed="false">שיער קצר</button></div></div><div id="gallery" class="gallery-grid"></div></section>
+    <section class="closing shell"><span data-icon="face" aria-hidden="true"></span><h2>אין מראה אחד נכון.<br>יש מקום לגלות את שלך.</h2><p>ההמלצות הן כיוונים להתנסות לפי הבחירות שלך.<br>אפשר לקחת פרט אחד, לשלב בין לוקים או לבחור אחרת.</p><a href="#studio" class="text-link">בחזרה לסטודיו<span data-icon="arrow" aria-hidden="true"></span></a></section>
   </main>
-  <footer class="footer shell"><a class="logo" href="./" dir="ltr" translate="no">vibe<span class="brand-dot" aria-hidden="true"></span></a><span>סטייל אישי. חופשי להיות שלך.</span></footer>
-  <dialog id="saved-dialog" aria-labelledby="saved-title"><div class="dialog-header"><div><p class="eyebrow">לוח ההשראה שלך</p><h2 id="saved-title">הלוקים ששווה לשמור.</h2></div><button class="icon-button" id="close-saved" aria-label="סגירת הלוקים השמורים"><span data-icon="close" aria-hidden="true"></span></button></div><p class="muted">שמורים בדפדפן הזה בלבד. תמונות אישיות אינן נשמרות.</p><div id="saved-list" class="saved-list"></div></dialog>
-  <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-message"></span><button id="undo-removal" hidden>ביטול הסרה</button></div>
+  <footer class="site-footer shell"><span class="footer-brand" dir="ltr" translate="no">FACEFORM</span><span>סטייל אישי מתחיל בבחירה שלך.</span></footer>
+  <dialog id="saved-dialog" aria-labelledby="saved-title"><div class="dialog-header"><div><p class="kicker">האוסף האישי שלך</p><h2 id="saved-title">לוקים ששווה לחזור אליהם.</h2></div><button class="icon-button" id="close-saved" aria-label="סגירת המועדפים"><span data-icon="close" aria-hidden="true"></span></button></div><p class="small-note">המועדפים נשמרים בדפדפן הזה בלבד. התמונה האישית אינה נשמרת.</p><div id="saved-list" class="saved-list"></div></dialog>
+  <dialog id="gallery-dialog" aria-labelledby="gallery-title"><div class="dialog-header"><h2 id="gallery-title">מבט מקרוב</h2><button class="icon-button" id="close-gallery" aria-label="סגירת תמונת ההשראה"><span data-icon="close" aria-hidden="true"></span></button></div><img id="gallery-image" width="600" height="800" alt=""><p id="gallery-description"></p><p class="small-note">תמונת השראה בלבד, אינה הדמיה של פני המשתמש.</p><div class="gallery-dialog-actions"><button class="icon-button" id="gallery-prev" aria-label="תמונת ההשראה הקודמת"><span data-icon="right" aria-hidden="true"></span></button><span id="gallery-position"></span><button class="icon-button" id="gallery-next" aria-label="תמונת ההשראה הבאה"><span data-icon="arrow" aria-hidden="true"></span></button><button class="button primary" id="use-gallery-style">לבחור את הסגנון הזה</button></div><a id="photo-credit" class="photo-credit" target="_blank" rel="noopener noreferrer">לצילום המקורי</a></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-description"></p><div class="confirm-actions"><button class="button secondary" id="cancel-confirm">ביטול</button><button class="button primary" id="accept-confirm">אישור</button></div></dialog>
+  <div id="toast" class="toast" hidden role="status" aria-live="polite"><span id="toast-message"></span><button id="undo-action" hidden>ביטול ההסרה</button></div>
+  <noscript><p class="noscript shell">כדי להשתמש בשאלון ובלוקים האישיים, יש להפעיל JavaScript בדפדפן.</p></noscript>
 </body>
 </html>
