@@ -51,12 +51,14 @@ export function recommend(input){
     const canColor=p.budget==='flex'&&p.maintenance!=='low'&&p.boldness===2&&i===2&&p.length!=='shaved';
     const hairColor=canColor?(p.undertone==='cool'?'#69404d':'#9b583c'):hairColors[p.hair].color;
     const minutes=p.time===5?5:p.time===15?[8,15,12][i]:[12,25,20][i];
-    const intensity=p.makeup==='none'?0:p.makeup==='light'?[25,40,35][i]:p.time===5?35:[50,75,65][i];
-    const shirt=p.vibe==='street'?['#313c62','#799c6e','#adc9ec'][i]:p.vibe==='creative'?['#7889d7','#c4dd67','#dc9586'][i]:p.vibe==='glam'?['#373b43','#554157','#8b556b'][i]:palette.colors[[1,3,0][i]];
+    const intensity=p.makeup==='none'?0:Math.min(90,(p.makeup==='light'?[25,40,35][i]:p.time===5?35:[50,75,65][i])+(p.skin>=4?8:0));
+    const shirt=p.vibe==='street'?['#313c62','#799c6e','#adc9ec'][i]:p.vibe==='creative'?['#7889d7','#c4dd67','#dc9586'][i]:p.vibe==='glam'?['#373b43','#554157','#8b556b'][i]:palette.colors[(p.skin>=4&&i===0)?2:[1,3,0][i]];
     const lip= i===1&&formal?(p.undertone==='warm'?'#a34335':'#8b3f61'):palette.lip;
     let shadow=palette.shadow;
     if(p.eye===2)shadow='#946579';
     if(p.eye===3)shadow='#b38a5c';
+    if(p.eye===1)shadow='#8b7561';
+    if(p.eye===4)shadow='#9c7b93';
     if(p.vibe==='glam'&&i===2)shadow='#9eabc3';
     const hairText=hairStyle==='shaved'?'קו נקי וטבעי, בלי צורך לשנות את האורך.':p.budget==='closet'?`סידור ${textureNames[p.texture]} באורך הקיים, עם ${i===0?'שביל טבעי':i===1?'שביל צד':'קווצות חופשיות סביב הפנים'}.`:`${hairNames[hairStyle]} במרקם ${textureNames[p.texture]}.${allowedCut&&i===2?' אפשרות לקיצור, בהתאם לנכונות שלך לשינוי.':' שומרים על האורך שבחרת.'}`;
     const makeupText=p.makeup==='none'?'הלוק ללא איפור. הצבע והאופי מגיעים מהשיער, הלבוש והאביזרים.':p.time===5?'מוקד צבע אחד: סומק או שפתון, לפי מה שכבר יש לך.':i===1&&formal?'שפתיים מודגשות, סומק עדין וקו עיניים רך.':'נגיעה מדורגת של סומק, שפתיים בגוון הרמוני וצללית רכה.';
