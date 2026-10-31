@@ -1,37 +1,63 @@
 # FACEFORM — Your Personal Style Guide
 
-A complete women-only Hebrew/RTL face styling website in HTML, CSS and vanilla JavaScript. An editorial beauty design in cream, black, powder pink and beige, with mobile layouts and keyboard-accessible controls.
+A women-only Hebrew/RTL face styling website in HTML, CSS and vanilla JavaScript. Cream, black, powder pink and beige; responsive layouts, system fonts and keyboard-accessible controls.
 
 ## Open locally
 
-Open index.html directly in a modern browser. Keep index.html, styles.css and app.js together. No installation, build, API key, server or internet connection is needed. A local static HTTP server is optional.
+Open index.html directly in a modern browser, keeping styles.css and app.js beside it. No build, installation, API key or backend is required. Images are embedded; the questionnaire, photo filtering, favorites and PNG export work offline. Source links and external inspiration search need an internet connection only when clicked.
 
-## Features
+## Personalization and photographs
 
-- Optional local face-photo preview, with replacement, removal and JPG/PNG/WebP validation (8MB / 40 megapixels).
-- Nine optional personal attributes: face shape, skin depth, undertone, eye color, current hair color, length, texture, brows and makeup preference. Illustrated face shapes, brows and texture choices accompany named color swatches.
-- Seven occasions and eight personalized illustrated style cards: Natural, Clean Look, French Chic, Old Money, Soft Glam, Classic, Bold and Editorial.
-- Instant, deterministic JavaScript recommendations: Natural, Elegant and Trendy. Each includes hair alternatives, hair colors, makeup, brows, a named palette, glasses, earrings and explanations. A no-makeup preference is respected across all events and styles. Suggestions are options, not absolute appearance rules.
-- Eight personalized SVG style examples, gallery filters, a keyboard-navigable lightbox, and style selection from the gallery. Every illustration uses the same selected face structure, skin/undertone, eyes, current hair color/length/texture, brows and makeup preference. Known face structure, texture and length constrain haircut eligibility before style ranking. All three looks preserve the chosen hair color; alternative colors are clearly optional. Unknown attributes are labeled, not inferred. Each result and lightbox includes all nine personal fields plus event and style.
-- Up to 18 favorites in localStorage, reopening saved preferences, removal with Undo, and graceful handling of unavailable storage. Favorites use faceform.saved.v1; old VIBE favorites are left untouched.
-- Downloadable PNG recommendation cards combining a personalized SVG illustration with written recommendations, colors, the complete selected profile and a clear schematic-illustration disclaimer. Personal photos are never included in these cards.
-- Restart clears the current questionnaire/photo after confirmation and keeps favorites.
+- Nine optional personal attributes: face shape, skin depth, undertone, eye color, current hair color, length, texture, brows and makeup preference; seven occasions and eight styles.
+- Natural, Elegant and Trendy recommendations keep known face/length/texture constraints and the selected current hair color. Each style has distinct hair finish, makeup direction, accessory direction and a compatible sourced 2026 trend. Makeup preferences take priority over trends, especially no makeup.
+- The previous repeated schematic portraits have been removed. Eighteen licensed photographic references illustrate different styling directions. They are inspiration photos of other women, never a simulation of the visitor's face.
+- Strict filtering is the default: a photograph must have documented matches for every known personal input, plus suitable style, occasion, variant and makeup intensity. Unknown source attributes exclude it. Strict filtering can legitimately return no photograph.
+- An explicit partial-information inspiration mode permits missing source attributes, labels them visibly and in the detailed audit, and still rejects every documented mismatch. It never silently relaxes the selection. Face shape and skin undertone are not inferred from stock photographs; those tags remain unverified.
+- When a suitable additional photo is unavailable, the recommendation remains usable as text and palette, with a clearly labeled empty state and a Pinterest search containing the selected aesthetic descriptors. No mismatched/repeated photo is substituted to fill a slot.
+- Images include author/source links; the gallery follows the chosen style and personal filter. Style previews avoid repeating a photo where another eligible photo is available. Lightbox navigation follows the filtered collection.
+- Favorites store only normalized choices, variant, reference mode and an optional public reference ID. Older FACEFORM favorites remain readable; old VIBE storage is untouched. Removal supports Undo.
+- PNG exports combine the selected reference (when available), personalized advice, palette, full selected profile, trend/source name and match limitations. Export also works without a matching photograph.
 
-## Privacy and scope
+## Privacy
 
-There is no AI, face analysis, backend, account, analytics or runtime API. Recommendations use only explicitly selected questionnaire answers. Personal photos use temporary browser object URLs, never leave the browser and never enter localStorage, Git or exports. Reloading the page clears the current personal photo. Only selected profiles and favorite variants are stored locally. Illustrations are schematic examples built from manual selections, not analysis of or simulations on the user's photograph. The editorial hero is explicitly labeled as a general photo; it is not a personalized recommendation.
+Personal uploads stay in temporary local browser object URLs. They are not analyzed, sent to a server, stored in localStorage, added to Git, or included in recommendation-card exports. There is no AI, tracking, backend or runtime API. Restart clears the active photo and choices while retaining favorites. Upload validation accepts JPG/PNG/WebP up to 8MB and 40 megapixels.
 
-The editorial hero photo, generated SVG illustrations, icons and system fonts are self-contained in the three runtime files. No external runtime assets are requested. The hero photo is embedded in app.js for offline use.
+All image data is bundled in app.js. External source/search links open only after a visitor clicks; searches contain chosen aesthetic descriptors, never their personal photograph.
+
+## 2026 sources
+
+Editorial directions were researched on 2026-10-31, using the [Pinterest Beauty Trend Report 2026](https://newsroom.pinterest.com/en-gb/news/beauty-trend-report-2026/), [Wella Hair Color Trends 2026](https://us.wella.professionalstore.com/en-US/blog/hair-color/2026-hair-color-trends), and [Vogue Fall 2026 Couture Beauty Report](https://www.vogue.com/article/fall-2026-haute-couture-beauty-trend-report).
+
+The app interprets these sources into optional personal styling directions. It does not claim that the licensed stock photos were taken at 2026 shows or automatically fetch a live trend feed. Existing user preferences are never overridden merely to apply a trend.
 
 ## Photo credits
 
-The general editorial hero photo is by [behrouz sasani](https://www.pexels.com/photo/portrait-of-a-woman-with-makeup-5856399/), used under the [Pexels license](https://www.pexels.com/license/). It is not a personalized result and does not imply endorsement. All personalized examples are drawn locally with SVG.
+The following photographs are used under the [Pexels license](https://www.pexels.com/license/), without implying endorsement. They are integrated with original recommendations, not offered as standalone stock downloads.
 
-## Validation
+- [behrouz sasani](https://www.pexels.com/photo/portrait-of-a-woman-with-makeup-5856399/) — שיער כהה בגימור מבריק, מסורק לאחור ואיפור עיניים חום
+- [Polina](https://www.pexels.com/photo/portrait-of-a-woman-with-short-hair-7089210/) — תספורת קצוצה מאוד ואיפור בגוונים זהובים
+- [Eric Moura](https://www.pexels.com/photo/portrait-of-a-young-woman-with-curly-hair-22763560/) — תלתלים כהים ותאורת סטודיו צבעונית; גוני עור ועיניים לא אומתו
+- [Antonio Conte](https://www.pexels.com/photo/a-close-up-of-a-woman-with-a-fringe-hairstyle-4640558/) — בוב שחור עם פוני ישר ואיפור עיניים מודגש
+- [Olena Bohovyk](https://www.pexels.com/photo/photo-of-woman-holding-her-face-3541389/) — הדגשות מבריקות סביב העיניים ושיער כהה אסוף
+- [Marlon Alves](https://www.pexels.com/photo/portrait-of-a-woman-with-makeup-on-her-face-13111258/) — שיער חום כהה ארוך והדגשת עיניים בגוון זהוב־כתום
+- [Eliza Maria de Souza](https://www.pexels.com/photo/close-up-shot-of-a-woman-s-face-4356958/) — תקריב בגוונים טבעיים ונמשים, עם מרקם העור גלוי
+- [Nayla Bernardes](https://www.pexels.com/photo/portrait-of-a-woman-with-red-hair-by-a-window-31850158/) — שיער נחושתי ארוך בתנועה רכה, באור חלון
+- [cottonbro studio](https://www.pexels.com/photo/portrait-of-a-woman-with-red-curly-hair-8285885/) — תלתלים רכים באורך הכתפיים, בתאורה חמה
+- [Jennings Ford](https://www.pexels.com/photo/striking-portrait-of-a-woman-with-red-hair-34220846/) — תלתלים אדומים, שפתיים מבריקות וצבע עז בצילום ביוטי
+- [Andrea Paci Cresti](https://www.pexels.com/photo/a-woman-in-black-shirt-looking-up-with-sunglasses-in-her-head-5043345/) — בוב בהיר עם פוני דק, עגילים ומשקפי שמש על הראש
+- [Pexels](https://www.pexels.com/photo/portrait-of-girl-with-short-haircut-5301008/) — בוב חום בהיר עם קווצות חופשיות במסגרת הפנים
+- [behrouz sasani](https://www.pexels.com/photo/portrait-of-a-woman-with-short-gray-hair-looking-at-the-camera-7316541/) — שיער כסוף קצר עם נפח עליון ומסגרת אסימטרית
+- [Alexander Krivitskiy](https://www.pexels.com/photo/close-up-studio-portrait-of-a-young-woman-with-gray-hair-20208896/) — שיער כסוף במסגרת דרמטית ואיפור מודגש בסטודיו
+- [Alexander Krivitskiy](https://www.pexels.com/photo/elegant-portrait-of-woman-with-silver-hair-30063351/) — נפח מוברש בגוון כסוף, איפור ערב ותכשיט אלגנטי
+- [Marcos Felipe](https://www.pexels.com/photo/woman-with-curly-black-hair-15306981/) — תלתלים שחורים ארוכים ומסגרת פנים פתוחה
+- [Vika Kirillova](https://www.pexels.com/photo/portrait-of-beautiful-woman-with-long-wavy-blonde-hair-11621973/) — שיער בלונד ארוך בגלים רכים וגימור טבעי
+- [Bruno Henrike](https://www.pexels.com/photo/blonde-woman-with-flowing-hair-in-studio-portrait-35547037/) — שיער ארוך ובהיר בגימור חלק ומוברש
 
-The personalized implementation was checked with 16,128 combinations of face shape, texture, length, style, occasion and makeup preference, verifying eligibility constraints and preservation of the selected hair color in all three variants. SVG checks cover every personal input, actual skin/eye/hair fill colors and explicit unknown states. DOM integration checks cover questionnaire controls, instant results, RTL tab navigation, favorite save/restore/Undo/storage errors, gallery navigation, photo validation and cleanup, restart, and PNG download success/failure. Native Canvas produced six example portraits and a personalized recommendation card for visual inspection; CSS syntax and core text/background contrast were checked.
+## Validation and limits
 
-These checks do not substitute for a browser layout review. Automated localhost browser access was blocked by the saved browser permission during development.
+Tests cover 16,128 recommendation combinations, 293 documented image mismatches across both matching modes, all 18 photo records, explicit missing attributes, style-specific directions, preference-safe 2026 trends, unique image selection and targeted search descriptors. DOM tests exercise the actual controls, strict/partial filters, empty states, lightbox/credits, saved choices/Undo/storage failure, personal-photo validation/cleanup, and PNG download success/error with and without a reference image. Native Canvas exports were inspected visually.
+
+These are source/DOM/Canvas checks, not a browser layout review. Automated localhost browser access remains blocked by the saved browser permission.
 
 ## Deployment
 
