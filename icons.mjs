@@ -2,6 +2,8 @@
 const paths={
   heart:'<path d="M20.4 4.8a5.5 5.5 0 0 0-7.8 0L12 5.5l-.6-.7a5.5 5.5 0 0 0-7.8 7.8L12 21l8.4-8.4a5.5 5.5 0 0 0 0-7.8Z"/>',
   arrow:'<path d="M19 12H5m6-6-6 6 6 6"/>',
+  minus:'<path d="M5 12h14"/>',
+  plus:'<path d="M5 12h14M12 5v14"/>',
   check:'<path d="m5 12 4 4L19 6"/>',
   close:'<path d="m6 6 12 12M18 6 6 18"/>',
   download:'<path d="M12 3v12m-5-5 5 5 5-5M5 16v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4"/>',

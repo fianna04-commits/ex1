@@ -17,7 +17,7 @@ export const occasions = [
 export const skinTones=[{color:'#f5d9c5',name:'בהיר מאוד'},{color:'#e5b89a',name:'בהיר'},{color:'#c8916e',name:'בינוני'},{color:'#ac7756',name:'שזוף'},{color:'#84563f',name:'כהה'},{color:'#563728',name:'עמוק'}];
 export const eyeColors=[{color:'#684632',name:'חום'},{color:'#a18a4c',name:'דבש'},{color:'#65876b',name:'ירוק'},{color:'#6b94ac',name:'כחול'},{color:'#7d8589',name:'אפור'}];
 export const hairColors=[{color:'#24201e',name:'שחור'},{color:'#4e352a',name:'חום כהה'},{color:'#856044',name:'חום בהיר'},{color:'#d4b57a',name:'בלונד'},{color:'#ae603c',name:'נחושת'},{color:'#b9b8b2',name:'אפור / כסוף'}];
-export const defaults={vibe:'minimal',occasion:'everyday',boldness:1,time:15,makeup:'light',budget:'closet',maintenance:'low',face:'oval',undertone:'neutral',skin:1,eye:0,hair:1,texture:'wavy',length:'bob',keepLength:true,glasses:false,beard:false};
+export const defaults={vibe:'minimal',occasion:'everyday',boldness:50,time:15,makeup:'light',budget:'closet',maintenance:'low',face:'oval',undertone:'neutral',skin:1,eye:0,hair:1,texture:'wavy',length:'bob',keepLength:true,glasses:false,beard:false};
 export const trends=[
   {id:'soft-bob',name:'בוב עם תנועה',category:'HAIR',description:'צורה רכה, קצוות בתנועה ומרקם טבעי. אפשר לשאול מהטרנד גם בלי לקצר.',source:'Pinterest · אוקטובר 2026',url:'https://newsroom.pinterest.com/en-gb/news/beauty-trend-report-2026/',vibe:'romantic',bg:'#f4d6de',style:'bob',hair:'#4e352a',lip:'#b36b76'},
   {id:'rosy',name:'סומק שעושה מצב רוח',category:'MAKEUP',description:'ורוד מאובק, אפרסק או טרקוטה — נגיעה של צבע שאפשר לבנות בהדרגה.',source:'Pinterest · אוקטובר 2026',url:'https://newsroom.pinterest.com/en-gb/news/beauty-trend-report-2026/',vibe:'natural',bg:'#e8eccf',style:'long',hair:'#856044',lip:'#c57b70'},
@@ -28,12 +28,27 @@ export function normalize(input={}){
   const p={...defaults};
   const enums={vibe:vibes.map(x=>x.id),occasion:occasions.map(x=>x.id),makeup:['none','light','full'],budget:['closet','small','flex'],maintenance:['low','medium','high'],face:['oval','round','square','heart','long','unknown'],undertone:['neutral','warm','cool'],texture:['straight','wavy','curly','coily'],length:['short','bob','long','shaved']};
   for(const [key,values] of Object.entries(enums))if(values.includes(input[key]))p[key]=input[key];
-  for(const [key,max]of [['skin',5],['eye',4],['hair',5],['boldness',2]]){const n=Number(input[key]);if(Number.isInteger(n)&&n>=0&&n<=max)p[key]=n;}
+  for(const [key,max]of [['skin',5],['eye',4],['hair',5],['boldness',100]]){const n=Number(input[key]);if(Number.isInteger(n)&&n>=0&&n<=max)p[key]=n;}
   if([5,15,30].includes(Number(input.time)))p.time=Number(input.time);
   for(const key of ['keepLength','glasses','beard'])if(typeof input[key]==='boolean')p[key]=input[key];
   return p;
 }
+export function boldnessLabel(value){
+  const n=Number.isFinite(Number(value))?Math.min(100,Math.max(0,Number(value))):50;
+  return n<20?'קרוב למוכר':n<40?'נגיעה חדשה':n<60?'קצת טוויסט':n<80?'שינוי מורגש':'בא לי להעז';
+}
+export function normalizeSavedProfile(input,version){
+  const profile=input&&typeof input==='object'?{...input}:{};
+  const old=Number(profile.boldness);
+  // Existing favorites used 0 / 1 / 2. New profiles use 0–100, so version them.
+  if(version!==2&&Number.isInteger(old)&&old>=0&&old<=2)profile.boldness=old*50;
+  return normalize(profile);
+}
 const hex=value=>/^#[0-9a-f]{6}$/i.test(value||'')?value:'#4e352a';
+function mixColor(from,to,amount){
+  const a=hex(from).slice(1),b=hex(to).slice(1),t=Math.max(0,Math.min(1,amount));
+  return '#'+[0,2,4].map(offset=>Math.round(parseInt(a.slice(offset,offset+2),16)*(1-t)+parseInt(b.slice(offset,offset+2),16)*t).toString(16).padStart(2,'0')).join('');
+}
 const hairNames={short:'קצר עם מרקם',bob:'בוב רך',long:'שכבות ארוכות',shaved:'קצוץ / ללא שיער'};
 const textureNames={straight:'חלק',wavy:'גלי',curly:'מתולתל',coily:'בתלתלים צפופים'};
 const palettes={warm:{lip:'#b46a50',blush:'#d58a69',shadow:'#9c774e',colors:['#b66b4c','#8b985b','#f2dfb3','#493a2c']},cool:{lip:'#a65879',blush:'#d18ba8',shadow:'#8c7898',colors:['#925c7a','#657cad','#e4dce9','#303c50']},neutral:{lip:'#b36c6e',blush:'#d48c85',shadow:'#99816a',colors:['#a56d6c','#6f826c','#e8dfcc','#333c45']}};
@@ -41,19 +56,21 @@ const names={minimal:['פחות, אבל בול','נקי עם נוכחות','טו
 export function baseLook(input={}){const p=normalize(input);return {hairStyle:p.length,texture:p.texture,hairColor:hairColors[p.hair].color,lip:'#a66b62',blush:'#c98778',shadow:'#a28472',shirt:'#d5d5c7',intensity:0,accessory:false};}
 export function recommend(input){
   const p=normalize(input),palette=palettes[p.undertone],vibe=vibes.find(v=>v.id===p.vibe),occasion=occasions.find(o=>o.id===p.occasion);
-  const formal=['party','event','date'].includes(p.occasion);
+  const formal=['party','event','date'].includes(p.occasion),boldness=p.boldness/100;
   const faceTip={oval:'אפשר לשחק בשביל ובנפח ולבחור את המסגרת שאוהבים.',round:'אם בא לך תחושה אנכית יותר, אפשר לנסות שביל צד ונפח בחלק העליון.',square:'אם בא לך מסגרת רכה יותר, אפשר לנסות קווצות חופשיות ליד הפנים.',heart:'קצוות עם תנועה באזור הלסת הם אפשרות למסגרת רחבה יותר למטה.',long:'אם בא לך נפח לצדדים, אפשר לנסות גלים או שביל צד.',unknown:'אפשר להשוות בין מסגרות שונות באיור ולבחור לפי ההעדפה שלך.'}[p.face];
   const toneReason=p.undertone==='neutral'?'בחרנו צבעים מאוזנים כדי לאפשר ניסוי בלי לקבע תת־גוון.':p.undertone==='warm'?'גווני אפרסק, זית וחמרה נבחרו לפי תת־הגוון החם שבחרת.':'ורוד מעושן וגוונים קרירים נבחרו לפי תת־הגוון הקר שבחרת.';
   return [0,1,2].map(i=>{
-    const allowedCut=!p.keepLength&&p.budget!=='closet'&&p.maintenance!=='low';
+    const allowedCut=!p.keepLength&&p.budget!=='closet'&&p.maintenance!=='low'&&p.boldness>=60;
     const alternate=p.face==='long'?'bob':p.face==='round'?'long':'short';
     const hairStyle=allowedCut&&i===2?alternate:p.length;
-    const canColor=p.budget==='flex'&&p.maintenance!=='low'&&p.boldness===2&&i===2&&p.length!=='shaved';
-    const hairColor=canColor?(p.undertone==='cool'?'#69404d':'#9b583c'):hairColors[p.hair].color;
+    const canColor=p.budget==='flex'&&p.maintenance!=='low'&&p.boldness>=80&&i===2&&p.length!=='shaved';
+    const hairColor=canColor?mixColor(hairColors[p.hair].color,p.undertone==='cool'?'#69404d':'#9b583c',(p.boldness-80)/20):hairColors[p.hair].color;
     const minutes=p.time===5?5:p.time===15?[8,15,12][i]:[12,25,20][i];
-    const intensity=p.makeup==='none'?0:Math.min(90,(p.makeup==='light'?[25,40,35][i]:p.time===5?35:[50,75,65][i])+(p.skin>=4?8:0));
-    const shirt=p.vibe==='street'?['#313c62','#799c6e','#adc9ec'][i]:p.vibe==='creative'?['#7889d7','#c4dd67','#dc9586'][i]:p.vibe==='glam'?['#373b43','#554157','#8b556b'][i]:palette.colors[(p.skin>=4&&i===0)?2:[1,3,0][i]];
-    const lip= i===1&&formal?(p.undertone==='warm'?'#a34335':'#8b3f61'):palette.lip;
+    const intensity=p.makeup==='none'?0:Math.min(90,Math.round(((p.makeup==='light'?[25,40,35][i]:p.time===5?35:[50,75,65][i])+(p.skin>=4?8:0))*(.65+.7*boldness)));
+    const targetShirt=p.vibe==='street'?['#313c62','#799c6e','#adc9ec'][i]:p.vibe==='creative'?['#7889d7','#c4dd67','#dc9586'][i]:p.vibe==='glam'?['#373b43','#554157','#8b556b'][i]:palette.colors[(p.skin>=4&&i===0)?2:[1,3,0][i]];
+    const shirt=mixColor(p.undertone==='cool'?'#b9beca':'#c4c1b7',targetShirt,.25+.75*boldness);
+    const statementLip=p.undertone==='warm'?'#a34335':'#8b3f61';
+    const lip=mixColor(palette.lip,statementLip,boldness*(i===1&&formal?1:.5));
     let shadow=palette.shadow;
     if(p.eye===2)shadow='#946579';
     if(p.eye===3)shadow='#b38a5c';
@@ -65,7 +82,7 @@ export function recommend(input){
     const outfit=p.vibe==='street'?'טי־שירט או גופייה בגזרה נינוחה עם שכבה פתוחה.':formal?'פריט חלק בגוון עמוק, עם אביזר אחד שמוסיף נוכחות.':'חולצה או פריט עליון בצבע מהפלטה, עם הבסיס הנוח שלך.';
     const budgetTip=p.budget==='closet'?'הכיוון נבנה לשימוש במה שכבר יש: ללא צביעה, קיצור או קנייה נדרשת.':p.budget==='small'?'אם רוצים תוספת, בוחרים אביזר אחד או מוצר צבע אחד.':'אפשר להשקיע בפריט מוביל או בייעוץ אצל מעצב שיער; אין כאן אומדן מחיר.';
     const trend=p.vibe==='glam'?trends[2]:p.vibe==='romantic'?trends[0]:p.vibe==='natural'?trends[1]:trends[3];
-    return {id:`${p.vibe}-${i}`,name:names[p.vibe][i],en:['EVERYDAY ENERGY','OCCASION EDIT','YOUR LITTLE TWIST'][i],bg:[vibe.bg,'#e2e9d8','#f0dbe2'][i],description:[`הסגנון שבחרת, בגרסה קלילה ל${occasion.name}.`,`נוכחות קצת יותר מורגשת, בלי לאבד את הווייב שלך.`,`פרט אחד שפותח כיוון חדש — במידת השינוי שבחרת.`][i],minutes,hairStyle,texture:p.texture,hairColor,lip,blush:palette.blush,shadow,shirt,intensity,accessory:i>0&&p.boldness>0,hairText,makeupText,outfit,budgetTip,reason:[toneReason,faceTip,`מרקם ${textureNames[p.texture]}, ${minutes} דקות להתארגנות ו${p.maintenance==='low'?'תחזוקה פשוטה':'רמת התחזוקה שבחרת'} נלקחו בחשבון.`,p.eye===2?'צללית בגוון שזיפי מציעה ניגוד לצבע העיניים הירוק שבחרת.':p.eye===3?'גווני נחושת מציעים ניגוד לכחול שבחרת.':'צבע העיניים שבחרת מופיע בהדמיה; אפשר להתנסות בפלטה כרצונך.'].join(' '),trend,profile:p};
+    return {id:`${p.vibe}-${i}`,name:names[p.vibe][i],en:['EVERYDAY ENERGY','OCCASION EDIT','YOUR LITTLE TWIST'][i],bg:[vibe.bg,'#e2e9d8','#f0dbe2'][i],description:[`הסגנון שבחרת, בגרסה קלילה ל${occasion.name}.`,`נוכחות קצת יותר מורגשת, בלי לאבד את הווייב שלך.`,`פרט אחד שפותח כיוון חדש — במידת השינוי שבחרת.`][i],minutes,hairStyle,texture:p.texture,hairColor,lip,blush:palette.blush,shadow,shirt,intensity,accessory:i>0&&p.boldness>=(i===1?55:30),hairText,makeupText,outfit,budgetTip,reason:[toneReason,faceTip,`בחרת ברמת שינוי של ${p.boldness}% — ${boldnessLabel(p.boldness)}. הצבעים ועוצמת האיפור מותאמים לרמה הזו.`,`מרקם ${textureNames[p.texture]}, ${minutes} דקות להתארגנות ו${p.maintenance==='low'?'תחזוקה פשוטה':'רמת התחזוקה שבחרת'} נלקחו בחשבון.`,p.eye===2?'צללית בגוון שזיפי מציעה ניגוד לצבע העיניים הירוק שבחרת.':p.eye===3?'גווני נחושת מציעים ניגוד לכחול שבחרת.':'צבע העיניים שבחרת מופיע בהדמיה; אפשר להתנסות בפלטה כרצונך.'].join(' '),trend,profile:p};
   });
 }
 export function cleanLook(input={},profile={}){

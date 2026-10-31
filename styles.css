@@ -117,6 +117,23 @@ svg { display: block; }
 .range-label output { background: #f0f2f7; padding: 3px 9px; border-radius: 6px; font-size: 12px; white-space: nowrap; }
 input[type=range] { accent-color: var(--blue); width: 100%; cursor: pointer; min-height: 36px; display: block; }
 .range-ends { display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+.boldness-field .range-label { flex-wrap: wrap; gap: 8px 12px; }
+.boldness-field .range-label output { font-variant-numeric: tabular-nums; }
+.boldness-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 12px; align-items: center; margin-top: 12px; }
+.range-adjust { display: grid; place-items: center; width: 44px; height: 44px; background: white; border: 1px solid #c7cfdf; border-radius: 12px; }
+.range-adjust:hover:not(:disabled) { background: var(--blue-soft); border-color: var(--blue); color: var(--blue); }
+.range-adjust:active:not(:disabled) { background: #dfe5ff; }
+.range-adjust .icon { width: 18px; height: 18px; }
+.boldness-controls input[type=range] { --range-progress: 50%; appearance: none; -webkit-appearance: none; height: 48px; min-height: 48px; padding: 0; margin: 0; border: 0; background: transparent; direction: rtl; }
+.boldness-controls input::-webkit-slider-runnable-track { height: 8px; border-radius: 20px; background: linear-gradient(to left, var(--blue) 0%, var(--blue) var(--range-progress), #dce2ef var(--range-progress), #dce2ef 100%); }
+.boldness-controls input::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; box-sizing: border-box; width: 28px; height: 28px; border: 3px solid white; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 1px #b2bfdc, 0 3px 8px #293f7c26; margin-top: -10px; cursor: grab; }
+.boldness-controls input:active::-webkit-slider-thumb { cursor: grabbing; background: var(--blue-dark); }
+.boldness-controls input::-moz-range-track { height: 8px; border-radius: 20px; background: linear-gradient(to left, var(--blue) 0%, var(--blue) var(--range-progress), #dce2ef var(--range-progress), #dce2ef 100%); }
+.boldness-controls input::-moz-range-progress { background: transparent; }
+.boldness-controls input::-moz-range-thumb { box-sizing: border-box; width: 28px; height: 28px; border: 3px solid white; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 1px #b2bfdc, 0 3px 8px #293f7c26; cursor: grab; }
+.boldness-controls input:active::-moz-range-thumb { cursor: grabbing; background: var(--blue-dark); }
+.boldness-field .range-ends { margin-inline: 56px; gap: 10px; }
+.boldness-help { color: var(--muted); font-size: 12px; margin: 15px 0 0; line-height: 1.8; }
 .wizard-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 20px 30px; border-top: 1px solid var(--line); background: #fcfcfd; }
 .wizard-footer > span { margin-inline-end: auto; color: var(--muted); font-size: 12px; }
 .wizard-footer .button { min-height: 46px; font-size: 14px; padding: 11px 19px; }
@@ -227,7 +244,6 @@ legend > span { color: var(--muted); font-size: 12px; margin-inline-start: 7px; 
 .trend-card p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0 0 8px; min-height: 76px; }
 .trend-card .text-button { font-size: 13px; }
 .source-link { display: block; min-height: 35px; padding-top: 10px; font-size: 11px; color: var(--muted); }
-.source-note { font-size: 12px; color: var(--muted); line-height: 1.7; margin: 27px 0 0; }
 .manifesto { margin-top: 70px; padding-block: 60px; border-top: 1px solid var(--line); text-align: center; }
 .manifesto > span { color: var(--blue); }
 .manifesto > span .icon { width: 31px; height: 31px; }
@@ -439,7 +455,6 @@ dialog::backdrop { background: #202a4359; backdrop-filter: blur(4px); }
   .trend-card p { min-height: 0; font-size: 15px; max-width: 48ch; }
   .trend-card .text-button { font-size: 14px; }
   .source-link { font-size: 12px; }
-  .source-note { font-size: 12px; }
   .manifesto { padding-block: 42px; margin-top: 40px; }
   .manifesto h2 { font-size: 32px; letter-spacing: -.7px; }
   .manifesto p { font-size: 14px; }

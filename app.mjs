@@ -1,4 +1,4 @@
-import {vibes,occasions,skinTones,eyeColors,hairColors,defaults,trends,normalize,recommend,baseLook,cleanLook,portrait} from './engine.mjs';
+import {vibes,occasions,skinTones,eyeColors,hairColors,defaults,trends,normalize,normalizeSavedProfile,boldnessLabel,recommend,baseLook,cleanLook,portrait} from './engine.mjs';
 import {icon,mountIcons} from './icons.mjs';
 
 const $=id=>document.getElementById(id);
@@ -13,7 +13,7 @@ function readSaved(){
   try{
     const data=JSON.parse(localStorage.getItem(storageKey)||'[]');
     if(!Array.isArray(data))return [];
-    return data.slice(0,maxSaved).filter(s=>s&&typeof s==='object'&&typeof s.id==='string'&&s.profile&&s.look).map(s=>({id:s.id.slice(0,80),name:String(s.name||'הלוק שלי').slice(0,60),profile:normalize(s.profile),look:cleanLook(s.look,s.profile)}));
+    return data.slice(0,maxSaved).filter(s=>s&&typeof s==='object'&&typeof s.id==='string'&&s.profile&&s.look).map(s=>{const profile=normalizeSavedProfile(s.profile,s.profileVersion);return {id:s.id.slice(0,80),name:String(s.name||'הלוק שלי').slice(0,60),profileVersion:2,profile,look:cleanLook(s.look,profile)};});
   }catch{return [];}
 }
 function persist(){
@@ -59,7 +59,10 @@ function updatePreview(){
   $('live-portrait').innerHTML=portrait(profile,look,'live');
   $('preview-vibe').textContent=vibes.find(v=>v.id===profile.vibe).name;
   $('preview-palette').innerHTML=[look.shirt,look.hairColor,look.lip].map(color=>`<i style="--color:${color}"></i>`).join('');
-  $('boldness-output').textContent=['נשארים קרוב','קצת טוויסט','פתוחים להפתעות'][profile.boldness];
+  $('boldness-output').textContent=`${profile.boldness}% · ${boldnessLabel(profile.boldness)}`;
+  $('boldness').setAttribute('aria-valuetext',`${profile.boldness} אחוז, ${boldnessLabel(profile.boldness)}`);
+  $('boldness').style.setProperty('--range-progress',profile.boldness+'%');
+  $('boldness-less').disabled=profile.boldness===0;$('boldness-more').disabled=profile.boldness===100;
 }
 function setStep(value,focus=false){
   step=Math.min(2,Math.max(0,value));
@@ -92,7 +95,7 @@ function saveLook(p,look,name,toggle=false){
   if(index>=0){if(!toggle){toast('הלוק הזה כבר באהובים שלך.');return;}removeSaved(saved[index].id);return;}
   else{
     if(saved.length>=maxSaved){toast(`אפשר לשמור עד ${maxSaved} לוקים. פנו מקום באהובים כדי לשמור חדש.`);return;}
-    saved.unshift({id:crypto.randomUUID(),name:String(name).slice(0,60),profile:normalize(p),look:cleanLook(look,p)});
+    saved.unshift({id:crypto.randomUUID(),name:String(name).slice(0,60),profileVersion:2,profile:normalize(p),look:cleanLook(look,p)});
   }
   if(!persist())saved=previous;
   else toast(`נשמר באהובים שלך. ${saved.length} לוקים שמורים.`);
@@ -172,6 +175,8 @@ form.addEventListener('submit',event=>event.preventDefault());
 form.addEventListener('input',event=>{if(event.target.type==='file')return;profile=readForm();updatePreview();});
 form.addEventListener('change',event=>{if(event.target.type==='file')return;profile=readForm();updatePreview();});
 form.addEventListener('click',event=>{
+  const adjustment=event.target.closest('[data-boldness-delta]');
+  if(adjustment){$('boldness').value=String(Math.max(0,Math.min(100,Number($('boldness').value)+Number(adjustment.dataset.boldnessDelta))));profile=readForm();updatePreview();return;}
   const vibe=event.target.closest('[data-vibe]');
   const occasion=event.target.closest('[data-occasion]');
   const color=event.target.closest('[data-color-key]');

@@ -48,9 +48,16 @@
             <section id="step-0" class="step-panel" role="tabpanel" aria-labelledby="step-tab-0">
               <p class="mini-label">נתחיל באנרגיה</p><h3>איזה סגנון עושה לך את זה?</h3><p class="muted">אין צורך להגדיר את עצמך. רק לבחור מה מרגיש נכון עכשיו.</p>
               <div id="vibe-options" class="vibe-grid" role="group" aria-label="בחירת סגנון"></div>
-              <label class="range-label" for="boldness">כמה בא לך לצאת מהשגרה? <output id="boldness-output">קצת טוויסט</output></label>
-              <input id="boldness" name="boldness" type="range" min="0" max="2" value="1" step="1">
-              <div class="range-ends"><span>הכי אני</span><span>בא לי להפתיע</span></div>
+              <div class="boldness-field">
+                <label class="range-label" for="boldness">כמה בא לך לצאת מהשגרה? <output id="boldness-output" for="boldness">50% · קצת טוויסט</output></label>
+                <div class="boldness-controls">
+                  <button type="button" class="range-adjust" id="boldness-less" data-boldness-delta="-10" aria-label="הפחתת מידת השינוי בעשרה אחוזים"><span data-icon="minus" aria-hidden="true"></span></button>
+                  <input id="boldness" name="boldness" type="range" min="0" max="100" value="50" step="1" aria-describedby="boldness-help" aria-valuetext="50 אחוז, קצת טוויסט">
+                  <button type="button" class="range-adjust" id="boldness-more" data-boldness-delta="10" aria-label="הגדלת מידת השינוי בעשרה אחוזים"><span data-icon="plus" aria-hidden="true"></span></button>
+                </div>
+                <div class="range-ends"><span>קרוב למוכר</span><span>בא לי להעז</span></div>
+                <p id="boldness-help" class="boldness-help">משינוי עדין ללוק בולט — אפשר לעצור בכל נקודה.</p>
+              </div>
             </section>
             <section id="step-1" class="step-panel" role="tabpanel" aria-labelledby="step-tab-1" hidden>
               <p class="mini-label">על מה אנחנו מתלבשים?</p><h3>לאן יוצאים?</h3><p class="muted">הלוק צריך לעבוד עם התוכניות שלך, וגם עם הזמן שיש לך.</p>
@@ -107,7 +114,6 @@
       <div class="section-heading"><div><p class="eyebrow">מה שרואים עכשיו</p><h2 id="trends-title">קצת השראה לעונה.</h2></div><span class="pill">עריכת סתיו 2026</span></div>
       <p class="trend-intro muted">השראה עדכנית שאפשר לקחת במינון שלך. כל טרנד מגיע עם מקור — וכל לוק נשאר בחירה אישית.</p>
       <div id="trend-cards" class="trend-grid"></div>
-      <p class="source-note">המקורות נבדקו ב־30.10.2026. זהו לקט ערוך, ולא פיד שמתעדכן אוטומטית.</p>
     </section>
     <section class="manifesto shell"><span data-icon="sparkles" aria-hidden="true"></span><h2>יותר מקום לנסות.<br>יותר מקום להיות עצמך.</h2><p>ההצעות מבוססות על הבחירות שלך ועל כללי שילוב פשוטים.<br>אפשר לדלג, לשנות, לערבב ולהמציא מחדש.</p><a class="secondary-link" href="#builder">לגלות את הסטייל שלך</a></section>
   </main>

@@ -5,6 +5,7 @@ A playful, Hebrew/RTL personal-style app. Choose a style and an occasion, set yo
 ## Features
 
 - Six style directions and six occasions.
+- A 0–100% change-preference slider with fine drag/keyboard control and ±10 buttons. It gradually affects color contrast and makeup intensity; bigger hair changes still respect budget, maintenance and keeping the current length.
 - Manual choices for face shape, skin tone/undertone, eyes, hair color/texture/length, glasses and beard.
 - Recommendations respect makeup preference, available time, maintenance, budget and keeping the current hair length.
 - Editable SVG illustration: hairstyle, texture, hair/lip/blush/clothing colors and makeup intensity.
@@ -19,6 +20,8 @@ There is **no AI**, face recognition, backend, account or external image process
 Favorites are stored in `localStorage` on the current browser/device only. Personal photos use temporary local object URLs and are never stored in `localStorage`. The only external asset request is the optional Rubik font from Google Fonts; system fonts work if it is unavailable.
 
 The interface uses a consistent cobalt/neutral palette, Hebrew-first typography, local SVG icons, larger color targets, visible keyboard focus and responsive form controls. Photo validation errors appear beside the upload control. Removed favorites can be restored for 10 seconds; the Undo action stays accessible inside the favorites dialog.
+
+Favorites created before the 0–100 slider retain their saved appearance. Their old 0/1/2 preference is migrated to 0/50/100 when opened.
 
 ## Run locally
 
