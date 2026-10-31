@@ -3,40 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f8f7f2">
+  <meta name="theme-color" content="#f7f8fa">
   <meta name="description" content="VIBE — בוחרים סגנון ואירוע, מגלים לוקים אישיים ומתנסים בשיער, איפור וצבעים בהדמיה מאוירת. ללא AI.">
   <title>VIBE — הלוק שלך, הווייב שלך</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;450;500;600;650;700;750;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
   <script type="module" src="./app.mjs"></script>
 </head>
 <body>
   <a class="skip" href="#builder">דילוג לבניית הלוק</a>
   <header class="header shell">
-    <a class="logo" href="./" aria-label="VIBE — עמוד הבית" dir="ltr">VIBE<span aria-hidden="true">✳</span></a>
-    <nav aria-label="ניווט ראשי"><a href="#builder">לבנות לוק</a><a href="#trends">מה חם עכשיו</a></nav>
-    <button class="saved-trigger" id="open-saved"><span aria-hidden="true">♡</span> האהובים שלי <span id="saved-count">0</span></button>
+    <a class="logo" href="./" aria-label="VIBE — עמוד הבית" dir="ltr" translate="no">vibe<span class="brand-dot" aria-hidden="true"></span></a>
+    <nav aria-label="ניווט ראשי"><a href="#builder">הסטודיו שלך</a><a href="#trends">השראה לעונה</a></nav>
+    <button class="saved-trigger" id="open-saved"><span data-icon="heart" aria-hidden="true"></span><span>האהובים שלי</span><span id="saved-count" aria-hidden="true">0</span></button>
   </header>
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="tiny-star" aria-hidden="true">✳</span> YOUR LOOK. YOUR RULES.</p>
-        <h1 id="hero-title">מה הווייב<br>שלך <span class="highlight">היום?</span></h1>
-        <p class="hero-description">דייט? מסיבה? סתם יום שבא לך לבלוט?<br>בוחרים סגנון ואירוע, ומגלים לוק שמרגיש הכי שלך.</p>
-        <a class="button dark" href="#builder">בואו נבנה לוק <span aria-hidden="true">↙</span></a>
-        <p class="hero-footnote">בלי חוקים קשיחים. בלי AI. עם הרבה מקום לשחק.</p>
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> הסטודיו האישי לסטייל שלך</p>
+        <h1 id="hero-title">היום שלך.<br>הסטייל שלך.</h1>
+        <p class="hero-description">מהווייב של הבוקר ועד התוכניות לערב.<br>מגלים שילובים של שיער, איפור וצבע —<br class="desktop-break"> ומוצאים את מה שמרגיש נכון לך.</p>
+        <div class="hero-actions"><a class="button dark" href="#builder">למצוא את הלוק שלי <span data-icon="arrow" aria-hidden="true"></span></a><a class="secondary-link" href="#trends">קצת השראה קודם</a></div>
+        <p class="hero-footnote"><span data-icon="sliders" aria-hidden="true"></span> בוחרים, מנסים, משנים. בקצב שלך.</p>
       </div>
       <div class="hero-art" aria-label="שני לוקים מאוירים להשראה">
-        <div class="art-grid" aria-hidden="true"></div>
-        <div class="fashion-card back-card"><div id="hero-portrait-back"></div><span dir="ltr">SOFT ENERGY / 02</span></div>
-        <div class="fashion-card front-card"><div id="hero-portrait-front"></div><span dir="ltr">MAIN CHARACTER / 01</span></div>
-        <span class="sticker" dir="ltr">100%<br>YOUR VIBE</span>
-        <span class="sparkle" aria-hidden="true">✦</span>
+        <div class="hero-stage"><div class="stage-heading"><span>מרחב לנסות משהו חדש</span><span data-icon="sparkles" aria-hidden="true"></span></div><div class="stage-portrait" id="hero-portrait-front"></div><div class="stage-footer"><span>סטריט, עם טאץ׳ אישי</span><div class="mini-palette" aria-label="גווני הלוק"><i style="--color:#637a8d"></i><i style="--color:#c8916e"></i><i style="--color:#4e352a"></i></div></div></div>
+        <div class="alternate-look"><div id="hero-portrait-back"></div><div><span class="alternate-label">ואולי דווקא…</span><strong>קצת יותר רך.</strong><span>אותו סטודיו, עוד כיוון.</span></div></div>
       </div>
     </section>
-    <div class="ribbon" aria-hidden="true"><div>STYLE IS A MOOD <span>✳</span> הלוק שלך. הבחירה שלך. <span>✳</span> LITTLE CHANGES, BIG ENERGY <span>✳</span> STYLE IS A MOOD <span>✳</span> הלוק שלך. הבחירה שלך.</div></div>
+    <ol class="how-it-works shell" aria-label="איך זה עובד"><li><span data-icon="sparkles" aria-hidden="true"></span><div><strong>מתחילים בווייב</strong><span>מה מרגיש נכון היום?</span></div></li><li><span data-icon="calendar" aria-hidden="true"></span><div><strong>מתאימים לתוכניות</strong><span>לאירוע, לזמן ולקצב שלך.</span></div></li><li><span data-icon="mirror" aria-hidden="true"></span><div><strong>נותנים טאץ׳ אישי</strong><span>מנסים את השילוב במראה.</span></div></li></ol>
     <section id="builder" class="builder shell" aria-labelledby="builder-title">
-      <div class="section-heading"><div><p class="eyebrow">THE PERSONAL EDIT</p><h2 id="builder-title">בואו נמצא את ה־<span dir="ltr">VIBE</span> שלך.</h2></div><span class="pill">3 צעדים. המון אפשרויות.</span></div>
+      <div class="section-heading"><div><p class="eyebrow">מקום לסטייל שלך</p><h2 id="builder-title">לוק שמתחיל בבחירות שלך.</h2></div><span class="pill">שלושה צעדים פשוטים</span></div>
       <div class="studio-grid">
         <div class="questionnaire">
           <div class="step-nav" role="tablist" aria-label="שלבי בניית הלוק">
@@ -44,7 +44,7 @@
             <button id="step-tab-1" role="tab" aria-selected="false" aria-controls="step-1" data-step="1" tabindex="-1"><span>02</span> התוכניות</button>
             <button id="step-tab-2" role="tab" aria-selected="false" aria-controls="step-2" data-step="2" tabindex="-1"><span>03</span> קצת עליך</button>
           </div>
-          <form id="profile-form">
+          <form id="profile-form" autocomplete="off">
             <section id="step-0" class="step-panel" role="tabpanel" aria-labelledby="step-tab-0">
               <p class="mini-label">נתחיל באנרגיה</p><h3>איזה סגנון עושה לך את זה?</h3><p class="muted">אין צורך להגדיר את עצמך. רק לבחור מה מרגיש נכון עכשיו.</p>
               <div id="vibe-options" class="vibe-grid" role="group" aria-label="בחירת סגנון"></div>
@@ -76,43 +76,43 @@
                 <label>אורך שיער<select name="length"><option value="short">קצר</option><option value="bob" selected>עד הכתפיים</option><option value="long">ארוך</option><option value="shaved">קצוץ / ללא שיער</option></select></label>
               </div>
               <div class="check-row"><label><input name="keepLength" type="checkbox" checked> שומרים על האורך</label><label><input name="glasses" type="checkbox"> עם משקפיים</label><label><input name="beard" type="checkbox"> עם זקן</label></div>
-              <details class="photo-details"><summary>תמונה ליד המראה <span>אופציונלי ↗</span></summary><p class="muted">תמונה לעיון בלבד, ללא זיהוי או ניתוח. היא נשארת בדפדפן ואינה נשמרת עם הלוקים.</p><label class="upload-label">בחירת תמונה<input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp"></label><div id="photo-area" hidden><img id="reference-photo" alt="התמונה שבחרת להשוואה עם האיור"><button class="text-button" type="button" id="remove-photo">הסרת התמונה</button></div><p id="photo-status" role="status"></p></details>
+              <details class="photo-details"><summary>תמונה ליד המראה <span>לבחירתך</span></summary><p class="muted" id="photo-help">תמונה לעיון בלבד, ללא זיהוי או ניתוח. היא נשארת בדפדפן ואינה נשמרת עם הלוקים. אפשר לבחור JPG, PNG או WebP עד 8MB.</p><label class="upload-label">בחירת תמונה<input id="photo-input" name="referencePhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-status"></label><div id="photo-area" hidden><img id="reference-photo" width="160" height="160" decoding="async" alt="התמונה שבחרת להשוואה עם האיור"><button class="text-button" type="button" id="remove-photo">הסרת התמונה</button></div><p id="photo-status" role="status"></p></details>
             </section>
             <div class="wizard-footer"><button type="button" class="text-button" id="previous" hidden>→ חזרה</button><span id="step-indicator">שלב 1 מתוך 3</span><button type="button" class="button dark" id="next">ממשיכים <span aria-hidden="true">←</span></button></div>
           </form>
         </div>
         <aside class="mirror-panel" aria-labelledby="mirror-title">
-          <div class="mirror-heading"><span class="live-dot"></span><h3 id="mirror-title">המראה שלך</h3><span class="mirror-tag">איור חי</span></div>
+          <div class="mirror-heading"><span class="live-dot"></span><h3 id="mirror-title">המראה שלך</h3><span class="mirror-tag">מתעדכנת איתך</span></div>
           <div id="live-portrait" class="live-portrait"></div>
-          <div class="mirror-caption"><span id="preview-vibe">SOFT MINIMAL</span><span dir="ltr">LOOK / 01</span></div>
-          <div class="mirror-message"><span aria-hidden="true">✧</span><p>זאת נקודת פתיחה.<br><strong>הבחירות שלך נותנות לה אופי.</strong></p></div>
-          <p class="mirror-note">המחשת צבעים וסגנון באיור, ללא שינוי תמונת פנים.</p>
+          <div class="mirror-caption"><span id="preview-vibe">נקי ומדויק</span><div id="preview-palette" class="mini-palette" aria-label="פלטת הצבעים הנוכחית"></div></div>
+          <div class="mirror-message"><span data-icon="sliders" aria-hidden="true"></span><p>כל בחירה פותחת כיוון.<br><strong>אפשר לשנות הכול בדרך.</strong></p></div>
+          <p class="mirror-note">הדמיה מאוירת להמחשת צבעים וסגנון.</p>
         </aside>
       </div>
     </section>
     <section id="results" class="results shell" aria-labelledby="results-title" hidden>
-      <div class="section-heading"><div><p class="eyebrow">MADE FOR YOUR MOOD</p><h2 id="results-title">שלושה כיוונים. הבחירה שלך.</h2><p id="results-summary" class="muted"></p></div><button class="text-button" id="edit-profile">עריכת הבחירות ↗</button></div>
+      <div class="section-heading"><div><p class="eyebrow">מהבחירות שלך, לכיוונים חדשים</p><h2 id="results-title" tabindex="-1">שלושה לוקים להכיר.</h2><p id="results-summary" class="muted"></p></div><button class="text-button" id="edit-profile">עריכת הבחירות</button></div>
       <div id="look-cards" class="look-grid"></div>
       <div id="playground" class="playground">
-        <div class="playground-art"><span class="pill">PLAY WITH YOUR LOOK</span><div id="edit-portrait"></div><button class="compare-button" id="compare" aria-pressed="false">הצגת הבסיס</button></div>
-        <div class="playground-controls"><p class="eyebrow">THE FINISHING TOUCH</p><h3 id="edit-title">עכשיו מוסיפים את הטאץ׳ שלך.</h3><p class="muted">החליפו פרט אחד או ערבבו הכול. זה הלוק שלכם.</p>
+        <div class="playground-art"><span class="pill">מרחב לשחק עם הלוק</span><div id="edit-portrait"></div><button class="compare-button" id="compare" aria-pressed="false">הצגת הבסיס</button></div>
+        <div class="playground-controls"><p class="eyebrow">מוסיפים את הטאץ׳ שלך</p><h3 id="edit-title">עכשיו מוסיפים את הטאץ׳ שלך.</h3><p class="muted">החליפו פרט אחד או ערבבו הכול. זה הלוק שלכם.</p>
           <div class="field-grid"><label>תסרוקת<select id="edit-hair"><option value="short">קצר עם מרקם</option><option value="bob">בוב רך</option><option value="long">שכבות ארוכות</option><option value="shaved">קצוץ / ללא שיער</option></select></label><label>מרקם<select id="edit-texture"><option value="straight">חלק</option><option value="wavy">גלי</option><option value="curly">מתולתל</option><option value="coily">תלתלים צפופים</option></select></label></div>
           <div class="edit-colors"><label>שיער<input type="color" id="edit-hair-color" aria-label="צבע שיער בהדמיה"></label><label>שפתיים<input type="color" id="edit-lip" aria-label="צבע שפתיים בהדמיה"></label><label>סומק<input type="color" id="edit-blush" aria-label="צבע סומק בהדמיה"></label><label>חולצה<input type="color" id="edit-shirt" aria-label="צבע חולצה בהדמיה"></label></div>
           <label class="range-label" for="edit-intensity">עוצמת האיפור <output id="intensity-output">עדין</output></label><input type="range" id="edit-intensity" min="0" max="100" value="35">
-          <div class="edit-actions"><button class="button dark" id="save-custom">שמירת הלוק ♡</button><button class="button light" id="download-look">הורדת האיור ↓</button></div>
+          <div class="edit-actions"><button class="button dark" id="save-custom"><span data-icon="heart" aria-hidden="true"></span>שמירת הלוק</button><button class="button light" id="download-look"><span data-icon="download" aria-hidden="true"></span>הורדת האיור</button></div>
         </div>
       </div>
     </section>
     <section id="trends" class="trends shell" aria-labelledby="trends-title">
-      <div class="section-heading"><div><p class="eyebrow">ON OUR RADAR</p><h2 id="trends-title">מה חם, ומה עושים עם זה?</h2></div><span class="pill">עריכת סתיו 2026</span></div>
+      <div class="section-heading"><div><p class="eyebrow">מה שרואים עכשיו</p><h2 id="trends-title">קצת השראה לעונה.</h2></div><span class="pill">עריכת סתיו 2026</span></div>
       <p class="trend-intro muted">השראה עדכנית שאפשר לקחת במינון שלך. כל טרנד מגיע עם מקור — וכל לוק נשאר בחירה אישית.</p>
       <div id="trend-cards" class="trend-grid"></div>
       <p class="source-note">המקורות נבדקו ב־30.10.2026. זהו לקט ערוך, ולא פיד שמתעדכן אוטומטית.</p>
     </section>
-    <section class="manifesto shell"><span aria-hidden="true">✳</span><h2>אין לוק אחד נכון.<br>יש את מה שמרגיש <em>שלך.</em></h2><p>ההצעות מבוססות על הבחירות שלך ועל כללי שילוב פשוטים.<br>אפשר לדלג, לשנות, לערבב ולהמציא מחדש.</p></section>
+    <section class="manifesto shell"><span data-icon="sparkles" aria-hidden="true"></span><h2>יותר מקום לנסות.<br>יותר מקום להיות עצמך.</h2><p>ההצעות מבוססות על הבחירות שלך ועל כללי שילוב פשוטים.<br>אפשר לדלג, לשנות, לערבב ולהמציא מחדש.</p><a class="secondary-link" href="#builder">לגלות את הסטייל שלך</a></section>
   </main>
-  <footer class="footer shell"><a class="logo" href="./" dir="ltr">VIBE<span aria-hidden="true">✳</span></a><span>סטייל זה משחק. תרגישו חופשי.</span></footer>
-  <dialog id="saved-dialog" aria-labelledby="saved-title"><div class="dialog-header"><div><p class="eyebrow">YOUR MOODBOARD</p><h2 id="saved-title">הלוקים ששווה לשמור.</h2></div><button class="icon-button" id="close-saved" aria-label="סגירת הלוקים השמורים">×</button></div><p class="muted">שמורים בדפדפן הזה בלבד. תמונות אישיות אינן נשמרות.</p><div id="saved-list" class="saved-list"></div></dialog>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer class="footer shell"><a class="logo" href="./" dir="ltr" translate="no">vibe<span class="brand-dot" aria-hidden="true"></span></a><span>סטייל אישי. חופשי להיות שלך.</span></footer>
+  <dialog id="saved-dialog" aria-labelledby="saved-title"><div class="dialog-header"><div><p class="eyebrow">לוח ההשראה שלך</p><h2 id="saved-title">הלוקים ששווה לשמור.</h2></div><button class="icon-button" id="close-saved" aria-label="סגירת הלוקים השמורים"><span data-icon="close" aria-hidden="true"></span></button></div><p class="muted">שמורים בדפדפן הזה בלבד. תמונות אישיות אינן נשמרות.</p><div id="saved-list" class="saved-list"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-message"></span><button id="undo-removal" hidden>ביטול הסרה</button></div>
 </body>
 </html>

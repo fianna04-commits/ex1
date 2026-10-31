@@ -8,7 +8,7 @@ A playful, Hebrew/RTL personal-style app. Choose a style and an occasion, set yo
 - Manual choices for face shape, skin tone/undertone, eyes, hair color/texture/length, glasses and beard.
 - Recommendations respect makeup preference, available time, maintenance, budget and keeping the current hair length.
 - Editable SVG illustration: hairstyle, texture, hair/lip/blush/clothing colors and makeup intensity.
-- Base/look comparison, SVG download and up to 12 local favorites.
+- Base/look comparison, SVG download and up to 12 local favorites, with Undo for removals.
 - Optional local reference photo. The photo is not analyzed, uploaded or included in saved looks.
 - Curated autumn 2026 trends with links to Pinterest and Wella primary sources, checked 2026-10-30. Trend content does not update automatically.
 
@@ -16,7 +16,9 @@ A playful, Hebrew/RTL personal-style app. Choose a style and an occasion, set yo
 
 There is **no AI**, face recognition, backend, account or external image processing. Recommendations use transparent, hand-written style rules and user preferences. The illustration demonstrates a color/style combination, not a prediction of a real haircut or makeup result. There are no beauty ratings or inferred identity attributes.
 
-Favorites are stored in `localStorage` on the current browser/device only. Personal photos use temporary local object URLs and are never stored in `localStorage`. The only external asset request is the optional Heebo font from Google Fonts; system fonts work if it is unavailable.
+Favorites are stored in `localStorage` on the current browser/device only. Personal photos use temporary local object URLs and are never stored in `localStorage`. The only external asset request is the optional Rubik font from Google Fonts; system fonts work if it is unavailable.
+
+The interface uses a consistent cobalt/neutral palette, Hebrew-first typography, local SVG icons, larger color targets, visible keyboard focus and responsive form controls. Photo validation errors appear beside the upload control. Removed favorites can be restored for 10 seconds; the Undo action stays accessible inside the favorites dialog.
 
 ## Run locally
 
@@ -32,6 +34,7 @@ The root of the `main` branch contains the site. Enable **Settings → Pages →
 - `styles.css`: responsive visual design.
 - `engine.mjs`: input normalization, style rules, trend catalog and SVG rendering.
 - `app.mjs`: UI, local photo preview, editor and favorites.
+- `icons.mjs`: local SVG icon set; no icon library or network dependency.
 - `favicon.svg`: app icon.
 
 No keys or email addresses are embedded in the site.
