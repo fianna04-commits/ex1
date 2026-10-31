@@ -26,7 +26,7 @@
         <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> הסטודיו האישי לסטייל שלך</p>
         <h1 id="hero-title">היום שלך.<br>הסטייל שלך.</h1>
         <p class="hero-description">מהווייב של הבוקר ועד התוכניות לערב.<br>מגלים שילובים של שיער, איפור וצבע —<br class="desktop-break"> ומוצאים את מה שמרגיש נכון לך.</p>
-        <div class="hero-actions"><a class="button dark" href="#builder">למצוא את הלוק שלי <span data-icon="arrow" aria-hidden="true"></span></a><a class="secondary-link" href="#trends">קצת השראה קודם</a></div>
+        <div class="hero-actions"><a class="button dark" href="#builder">למצוא את הלוק שלי <span data-icon="arrow" aria-hidden="true"></span></a><a class="secondary-link" href="#photo-studio">לעבוד עם תמונה שלי</a></div>
         <p class="hero-footnote"><span data-icon="sliders" aria-hidden="true"></span> בוחרים, מנסים, משנים. בקצב שלך.</p>
       </div>
       <div class="hero-art" aria-label="שני לוקים מאוירים להשראה">
@@ -83,7 +83,7 @@
                 <label>אורך שיער<select name="length"><option value="short">קצר</option><option value="bob" selected>עד הכתפיים</option><option value="long">ארוך</option><option value="shaved">קצוץ / ללא שיער</option></select></label>
               </div>
               <div class="check-row"><label><input name="keepLength" type="checkbox" checked> שומרים על האורך</label><label><input name="glasses" type="checkbox"> עם משקפיים</label><label><input name="beard" type="checkbox"> עם זקן</label></div>
-              <details class="photo-details"><summary>תמונה ליד המראה <span>לבחירתך</span></summary><p class="muted" id="photo-help">תמונה לעיון בלבד, ללא זיהוי או ניתוח. היא נשארת בדפדפן ואינה נשמרת עם הלוקים. אפשר לבחור JPG, PNG או WebP עד 8MB.</p><label class="upload-label">בחירת תמונה<input id="photo-input" name="referencePhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-status"></label><div id="photo-area" hidden><img id="reference-photo" width="160" height="160" decoding="async" alt="התמונה שבחרת להשוואה עם האיור"><button class="text-button" type="button" id="remove-photo">הסרת התמונה</button></div><p id="photo-status" role="status"></p></details>
+              <div class="photo-details"><a class="secondary-link" href="#photo-studio">רוצה לנסות איפור על התמונה האישית שלך?</a><p class="muted">אפשר להמשיך גם לסטודיו לתמונות ולמקם את הצבעים ידנית.</p></div>
             </section>
             <div class="wizard-footer"><button type="button" class="text-button" id="previous" hidden>→ חזרה</button><span id="step-indicator">שלב 1 מתוך 3</span><button type="button" class="button dark" id="next">ממשיכים <span aria-hidden="true">←</span></button></div>
           </form>
@@ -107,8 +107,39 @@
           <div class="edit-colors"><label>שיער<input type="color" id="edit-hair-color" aria-label="צבע שיער בהדמיה"></label><label>שפתיים<input type="color" id="edit-lip" aria-label="צבע שפתיים בהדמיה"></label><label>סומק<input type="color" id="edit-blush" aria-label="צבע סומק בהדמיה"></label><label>חולצה<input type="color" id="edit-shirt" aria-label="צבע חולצה בהדמיה"></label></div>
           <label class="range-label" for="edit-intensity">עוצמת האיפור <output id="intensity-output">עדין</output></label><input type="range" id="edit-intensity" min="0" max="100" value="35">
           <div class="edit-actions"><button class="button dark" id="save-custom"><span data-icon="heart" aria-hidden="true"></span>שמירת הלוק</button><button class="button light" id="download-look"><span data-icon="download" aria-hidden="true"></span>הורדת האיור</button></div>
+          <button class="text-button photo-look-link" id="photo-use-look">לנסות את צבעי הלוק על התמונה שלי</button>
         </div>
       </div>
+    </section>
+    <section id="photo-studio" class="photo-studio shell" aria-labelledby="photo-title">
+      <div class="section-heading"><div><p class="eyebrow">המראה, עם תמונה שלך</p><h2 id="photo-title">מנסים את הצבעים עליך.</h2></div><span class="pill">עריכה ידנית · נשארת אצלך</span></div>
+      <p class="muted photo-intro" id="photo-help">מוסיפים תמונה וממקמים שפתון, סומק וצללית בעזרת המסגרת הכחולה. זו המחשה ידנית של צבעים, ללא זיהוי פנים. אפשר לבחור JPG, PNG או WebP עד 8MB.</p>
+      <div class="photo-upload-bar"><label class="upload-label">הוספת תמונה אישית<input id="photo-input" name="referencePhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-status"></label><div id="photo-area" hidden><img id="reference-photo" width="160" height="160" decoding="async" alt="התמונה האישית שנבחרה לעריכה מקומית"><button class="text-button" type="button" id="remove-photo">הסרת התמונה</button></div></div>
+      <p id="photo-status" role="status"></p>
+      <div class="photo-workspace">
+        <div class="photo-canvas-panel"><div class="photo-toolbar"><button class="button light" id="photo-compare" aria-pressed="false" disabled>השוואה למקור</button><button class="text-button" id="photo-undo" disabled>ביטול פעולה</button><button class="text-button" id="photo-reset" disabled>איפוס הצבעים</button></div>
+          <div id="photo-empty" class="photo-empty"><span data-icon="image" aria-hidden="true"></span><h3>התמונה שלך, עוד אפשרויות.</h3><p>בחרו תמונה כדי להתחיל. לצבעים אפשר לתת מקום, ואז לדייק אותו.</p></div>
+          <div id="photo-canvas-frame" class="photo-canvas-frame" hidden><canvas id="photo-canvas" width="1" height="1" tabindex="0" aria-label="מראה לעריכה ידנית של תמונה" aria-describedby="photo-canvas-help"></canvas></div>
+          <p id="photo-canvas-help" class="photo-canvas-help">גררו את המסגרת למקום הרצוי או השתמשו בחיצי המקלדת ובכפתורי המיקום. אפשר לדייק את הגודל בסרגלים.</p>
+        </div>
+        <fieldset id="photo-settings" class="photo-settings" disabled><legend>הכלים שלך</legend>
+          <div id="photo-parts" class="photo-parts" role="group" aria-label="בחירת אזור לעריכה"></div>
+          <div class="photo-part-heading"><h3 id="photo-part-title">שפתיים</h3><label class="photo-visible"><input type="checkbox" id="photo-enabled" checked>הצגת הצבע</label></div>
+          <div class="photo-color-row"><label>גוון הצבע<input type="color" id="photo-color" name="photoColor" value="#ad5269"></label><div><label class="range-label" for="photo-opacity">עוצמת הצבע<output id="photo-opacity-value" for="photo-opacity">45%</output></label><input type="range" id="photo-opacity" name="photoOpacity" min="0" max="100" value="45"></div></div>
+          <div class="photo-position-buttons" id="photo-position-buttons" role="group" aria-label="כיוון מדויק של מיקום הצבע"><button type="button" data-photo-dx="-2" data-photo-dy="0" aria-label="הזזה שמאלה"><span data-icon="left" aria-hidden="true"></span></button><button type="button" data-photo-dx="0" data-photo-dy="-2" aria-label="הזזה למעלה"><span data-icon="up" aria-hidden="true"></span></button><button type="button" data-photo-dx="0" data-photo-dy="2" aria-label="הזזה למטה"><span data-icon="down" aria-hidden="true"></span></button><button type="button" data-photo-dx="2" data-photo-dy="0" aria-label="הזזה ימינה"><span data-icon="right" aria-hidden="true"></span></button></div>
+          <div class="photo-range-grid">
+            <div><label class="range-label" for="photo-x">מיקום לרוחב<output id="photo-x-value" for="photo-x">50%</output></label><input type="range" id="photo-x" name="photoX" min="0" max="100" step="0.5" value="50"></div>
+            <div><label class="range-label" for="photo-y">מיקום לגובה<output id="photo-y-value" for="photo-y">65%</output></label><input type="range" id="photo-y" name="photoY" min="0" max="100" step="0.5" value="65"></div>
+            <div><label class="range-label" for="photo-width">רוחב<output id="photo-width-value" for="photo-width">18%</output></label><input type="range" id="photo-width" name="photoWidth" min="1" max="100" step="0.5" value="18"></div>
+            <div><label class="range-label" for="photo-height">גובה<output id="photo-height-value" for="photo-height">5%</output></label><input type="range" id="photo-height" name="photoHeight" min="1" max="60" step="0.5" value="5"></div>
+            <div><label class="range-label" for="photo-rotation">סיבוב<output id="photo-rotation-value" for="photo-rotation">0°</output></label><input type="range" id="photo-rotation" name="photoRotation" min="-90" max="90" step="1" value="0"></div>
+            <div><label class="range-label" for="photo-softness">רכות הקצוות<output id="photo-softness-value" for="photo-softness">15%</output></label><input type="range" id="photo-softness" name="photoSoftness" min="0" max="100" value="15"></div>
+          </div>
+          <label class="photo-visible photo-guide-control"><input type="checkbox" id="photo-guides" checked>הצגת מסגרת עזר</label>
+          <p class="photo-local-note">ההורדה כוללת את הצבעים בלבד, ללא מסגרת העזר. התמונה והעריכות אינן נשמרות באהובים או נשלחות לשרת.</p>
+        </fieldset>
+      </div>
+      <div class="photo-download-row"><span>אהבת את השילוב? אפשר לשמור אותו אצלך.</span><button class="button dark" id="photo-export" disabled><span data-icon="download" aria-hidden="true"></span>הורדת התמונה</button></div>
     </section>
     <section id="trends" class="trends shell" aria-labelledby="trends-title">
       <div class="section-heading"><div><p class="eyebrow">מה שרואים עכשיו</p><h2 id="trends-title">קצת השראה לעונה.</h2></div><span class="pill">עריכת סתיו 2026</span></div>

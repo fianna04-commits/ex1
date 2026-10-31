@@ -1,12 +1,13 @@
 import {vibes,occasions,skinTones,eyeColors,hairColors,defaults,trends,normalize,normalizeSavedProfile,boldnessLabel,recommend,baseLook,cleanLook,portrait} from './engine.mjs';
 import {icon,mountIcons} from './icons.mjs';
+import {initPhotoStudio} from './photo-studio.mjs';
 
 const $=id=>document.getElementById(id);
 const form=$('profile-form');
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const storageKey='vibe.saved.v1';
 const maxSaved=12;
-let profile={...defaults},step=0,looks=[],activeLook=null,editorProfile={...defaults},comparing=false,photoURL=null,toastTimer,resultKey='',undoAction=null;
+let profile={...defaults},step=0,looks=[],activeLook=null,editorProfile={...defaults},comparing=false,toastTimer,resultKey='',undoAction=null;
 let saved=readSaved();
 
 function readSaved(){
@@ -165,12 +166,6 @@ function renderTrends(){
     return `<article class="trend-card"><div class="trend-visual" style="--trend-bg:${trend.bg}">${portrait(p,look,'trend'+i)}<span class="trend-category">${['שיער','איפור','איפור','צבע שיער'][i]}</span></div><h3>${trend.name}</h3><p>${trend.description}</p><button class="text-button" data-trend="${trend.id}">לקחת את הווייב הזה</button><a class="source-link" href="${trend.url}" target="_blank" rel="noopener noreferrer">${trend.source} · למקור</a></article>`;
   }).join('');
 }
-function removePhoto(){
-  if(photoURL){URL.revokeObjectURL(photoURL);photoURL=null;}
-  $('reference-photo').removeAttribute('src');$('photo-area').hidden=true;$('photo-input').value='';$('photo-input').removeAttribute('aria-invalid');$('photo-status').textContent='';$('photo-status').classList.remove('error');
-}
-function photoError(text){$('photo-status').textContent=text;$('photo-status').classList.add('error');$('photo-input').setAttribute('aria-invalid','true');}
-
 form.addEventListener('submit',event=>event.preventDefault());
 form.addEventListener('input',event=>{if(event.target.type==='file')return;profile=readForm();updatePreview();});
 form.addEventListener('change',event=>{if(event.target.type==='file')return;profile=readForm();updatePreview();});
@@ -228,22 +223,12 @@ $('trend-cards').addEventListener('click',event=>{
   const button=event.target.closest('[data-trend]');if(!button)return;
   const trend=trends.find(t=>t.id===button.dataset.trend);profile.vibe=trend.vibe;writeForm();setStep(0);scrollTo('builder');toast('הווייב נבחר. עכשיו מתאימים אותו לתוכניות שלך.');
 });
-$('photo-input').addEventListener('change',event=>{
-  const file=event.target.files?.[0];if(!file)return;
-  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){photoError('סוג הקובץ לא נתמך. בחרו תמונה מסוג JPG, PNG או WebP.');event.target.value='';return;}
-  if(file.size>8*1024*1024){photoError('התמונה גדולה מדי. בחרו תמונה עד 8MB.');event.target.value='';return;}
-  if(photoURL)URL.revokeObjectURL(photoURL);
-  photoURL=URL.createObjectURL(file);
-  $('reference-photo').onload=()=>{$('photo-area').hidden=false;$('photo-status').classList.remove('error');$('photo-input').removeAttribute('aria-invalid');$('photo-status').textContent='התמונה מוצגת רק בדפדפן שלך. היא אינה נשלחת לשרת.';};
-  $('reference-photo').onerror=()=>{removePhoto();photoError('לא הצלחנו לפתוח את התמונה. נסו קובץ אחר מסוג JPG, PNG או WebP.');};
-  $('reference-photo').src=photoURL;
-});
-$('remove-photo').addEventListener('click',removePhoto);
-window.addEventListener('pagehide',()=>{if(photoURL)URL.revokeObjectURL(photoURL);});
+$('photo-use-look').addEventListener('click',()=>{if(activeLook){photoStudio.applyLook(activeLook);scrollTo('photo-studio');}});
 window.addEventListener('storage',event=>{if(event.key===storageKey){saved=readSaved();updateSavedUI();if($('saved-dialog').open)renderSaved();}});
 
 const heroA=normalize({...defaults,vibe:'street',skin:2,eye:2,length:'short',texture:'wavy'});
 const heroB=normalize({...defaults,vibe:'romantic',skin:4,eye:0,length:'long',texture:'curly'});
 $('hero-portrait-front').innerHTML=portrait(heroA,{...baseLook(heroA),shirt:'#637a8d',lip:'#a85f6a',blush:'#d4837b',intensity:40,accessory:true},'heroA');
 $('hero-portrait-back').innerHTML=portrait(heroB,{...baseLook(heroB),shirt:'#f8f3e9',lip:'#b47872',blush:'#cc806b',intensity:45},'heroB');
+const photoStudio=initPhotoStudio({notify:toast});
 mountIcons();writeForm();setStep(0);renderTrends();updateSavedUI();
